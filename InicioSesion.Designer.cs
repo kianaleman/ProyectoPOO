@@ -79,6 +79,7 @@
             tbPassword.Name = "tbPassword";
             tbPassword.Size = new Size(279, 27);
             tbPassword.TabIndex = 3;
+            tbPassword.UseSystemPasswordChar = true;
             // 
             // label3
             // 
