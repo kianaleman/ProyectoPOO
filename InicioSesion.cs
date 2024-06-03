@@ -51,7 +51,7 @@ namespace VeterinariaProyecto
             }
             else
             {
-
+                MessageBox.Show("Ha ingresado exitosamente");
             }
 
         }
