@@ -1,11 +1,11 @@
 namespace VeterinariaProyecto
 {
-    public partial class InicioSesion : Form
+    public partial class FormInicioSesion : Form
     {
         string user = "admon";
         string password = "1234";
 
-        public InicioSesion()
+        public FormInicioSesion()
         {
             InitializeComponent();
         }

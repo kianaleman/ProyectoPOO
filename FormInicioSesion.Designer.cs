@@ -1,6 +1,6 @@
 ﻿namespace VeterinariaProyecto
 {
-    partial class InicioSesion
+    partial class FormInicioSesion
     {
         /// <summary>
         ///  Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InicioSesion));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormInicioSesion));
             label1 = new Label();
             pictureBox1 = new PictureBox();
             label2 = new Label();
@@ -141,6 +141,7 @@
             Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
             Name = "InicioSesion";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Veterinaria El POO";
             Load += Form1_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();

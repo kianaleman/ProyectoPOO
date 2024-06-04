@@ -32,12 +32,12 @@
             label1 = new Label();
             pictureBox1 = new PictureBox();
             label2 = new Label();
-            button1 = new Button();
-            button2 = new Button();
-            button3 = new Button();
-            button4 = new Button();
-            button5 = new Button();
-            button6 = new Button();
+            btnOwnerPet = new Button();
+            AddPet = new Button();
+            btnAddQuery = new Button();
+            btnAddPet = new Button();
+            btnSettings = new Button();
+            btnExit = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -71,60 +71,79 @@
             label2.TabIndex = 2;
             label2.Text = "Seleccione una de las siguientes opciones:";
             // 
-            // button1
+            // btnOwnerPet
             // 
-            button1.Location = new Point(35, 165);
-            button1.Name = "button1";
-            button1.Size = new Size(137, 67);
-            button1.TabIndex = 3;
-            button1.Text = "Dueños de Mascotas";
-            button1.UseVisualStyleBackColor = true;
+            btnOwnerPet.BackColor = SystemColors.Info;
+            btnOwnerPet.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnOwnerPet.ForeColor = Color.Brown;
+            btnOwnerPet.Location = new Point(35, 165);
+            btnOwnerPet.Name = "btnOwnerPet";
+            btnOwnerPet.Size = new Size(137, 67);
+            btnOwnerPet.TabIndex = 3;
+            btnOwnerPet.Text = "Dueños de Mascotas";
+            btnOwnerPet.UseVisualStyleBackColor = false;
+            btnOwnerPet.Click += btnOwnerPet_Click;
             // 
-            // button2
+            // AddPet
             // 
-            button2.Location = new Point(216, 261);
-            button2.Name = "button2";
-            button2.Size = new Size(137, 67);
-            button2.TabIndex = 4;
-            button2.Text = "Editar Mascotas";
-            button2.UseVisualStyleBackColor = true;
+            AddPet.BackColor = SystemColors.Info;
+            AddPet.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
+            AddPet.ForeColor = Color.Brown;
+            AddPet.Location = new Point(216, 261);
+            AddPet.Name = "AddPet";
+            AddPet.Size = new Size(137, 67);
+            AddPet.TabIndex = 4;
+            AddPet.Text = "Editar Mascotas";
+            AddPet.UseVisualStyleBackColor = false;
             // 
-            // button3
+            // btnAddQuery
             // 
-            button3.Location = new Point(216, 165);
-            button3.Name = "button3";
-            button3.Size = new Size(137, 67);
-            button3.TabIndex = 5;
-            button3.Text = "Agregar Consulta";
-            button3.UseVisualStyleBackColor = true;
+            btnAddQuery.BackColor = SystemColors.Info;
+            btnAddQuery.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
+            btnAddQuery.ForeColor = Color.Brown;
+            btnAddQuery.Location = new Point(216, 165);
+            btnAddQuery.Name = "btnAddQuery";
+            btnAddQuery.Size = new Size(137, 67);
+            btnAddQuery.TabIndex = 5;
+            btnAddQuery.Text = "Agregar Consulta";
+            btnAddQuery.UseVisualStyleBackColor = false;
             // 
-            // button4
+            // btnAddPet
             // 
-            button4.Location = new Point(35, 261);
-            button4.Name = "button4";
-            button4.Size = new Size(137, 67);
-            button4.TabIndex = 6;
-            button4.Text = "Añadir Mascota";
-            button4.UseVisualStyleBackColor = true;
-            button4.Click += button4_Click;
+            btnAddPet.BackColor = SystemColors.Info;
+            btnAddPet.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnAddPet.ForeColor = Color.Brown;
+            btnAddPet.Location = new Point(35, 261);
+            btnAddPet.Name = "btnAddPet";
+            btnAddPet.Size = new Size(137, 67);
+            btnAddPet.TabIndex = 6;
+            btnAddPet.Text = "Añadir Mascota";
+            btnAddPet.UseVisualStyleBackColor = false;
             // 
-            // button5
+            // btnSettings
             // 
-            button5.Location = new Point(35, 350);
-            button5.Name = "button5";
-            button5.Size = new Size(137, 67);
-            button5.TabIndex = 7;
-            button5.Text = "Ajustes";
-            button5.UseVisualStyleBackColor = true;
+            btnSettings.BackColor = SystemColors.Info;
+            btnSettings.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
+            btnSettings.ForeColor = Color.Brown;
+            btnSettings.Location = new Point(35, 350);
+            btnSettings.Name = "btnSettings";
+            btnSettings.Size = new Size(137, 67);
+            btnSettings.TabIndex = 7;
+            btnSettings.Text = "Ajustes";
+            btnSettings.UseVisualStyleBackColor = false;
             // 
-            // button6
+            // btnExit
             // 
-            button6.Location = new Point(216, 350);
-            button6.Name = "button6";
-            button6.Size = new Size(137, 67);
-            button6.TabIndex = 8;
-            button6.Text = "Salir";
-            button6.UseVisualStyleBackColor = true;
+            btnExit.BackColor = SystemColors.Info;
+            btnExit.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
+            btnExit.ForeColor = Color.Brown;
+            btnExit.Location = new Point(216, 350);
+            btnExit.Name = "btnExit";
+            btnExit.Size = new Size(137, 67);
+            btnExit.TabIndex = 8;
+            btnExit.Text = "Salir";
+            btnExit.UseVisualStyleBackColor = false;
+            btnExit.Click += btnExit_Click;
             // 
             // FormMain
             // 
@@ -132,19 +151,20 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(128, 255, 128);
             ClientSize = new Size(800, 450);
-            Controls.Add(button6);
-            Controls.Add(button5);
-            Controls.Add(button4);
-            Controls.Add(button3);
-            Controls.Add(button2);
-            Controls.Add(button1);
+            Controls.Add(btnExit);
+            Controls.Add(btnSettings);
+            Controls.Add(btnAddPet);
+            Controls.Add(btnAddQuery);
+            Controls.Add(AddPet);
+            Controls.Add(btnOwnerPet);
             Controls.Add(label2);
             Controls.Add(pictureBox1);
             Controls.Add(label1);
-            FormBorderStyle = FormBorderStyle.Fixed3D;
+            FormBorderStyle = FormBorderStyle.None;
             Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
             Name = "FormMain";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "FormMain";
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
@@ -156,11 +176,11 @@
         private Label label1;
         private PictureBox pictureBox1;
         private Label label2;
-        private Button button1;
-        private Button button2;
-        private Button button3;
-        private Button button4;
-        private Button button5;
-        private Button button6;
+        private Button btnOwnerPet;
+        private Button AddPet;
+        private Button btnAddQuery;
+        private Button btnAddPet;
+        private Button btnSettings;
+        private Button btnExit;
     }
 }

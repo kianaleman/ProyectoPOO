@@ -16,4 +16,5 @@ C:\Users\kiana\source\repos\VeterinariaProyecto\obj\Debug\net8.0-windows\Veterin
 C:\Users\kiana\source\repos\VeterinariaProyecto\obj\Debug\net8.0-windows\VeterinariaProyecto.genruntimeconfig.cache
 C:\Users\kiana\source\repos\VeterinariaProyecto\obj\Debug\net8.0-windows\ref\VeterinariaProyecto.dll
 C:\Users\kiana\source\repos\VeterinariaProyecto\obj\Debug\net8.0-windows\VeterinariaProyecto.FormMain.resources
-C:\Users\kiana\source\repos\VeterinariaProyecto\obj\Debug\net8.0-windows\VeterinariaProyecto.InicioSesion.resources
+C:\Users\kiana\source\repos\VeterinariaProyecto\obj\Debug\net8.0-windows\VeterinariaProyecto.FormInicioSesion.resources
+C:\Users\kiana\source\repos\VeterinariaProyecto\obj\Debug\net8.0-windows\VeterinariaProyecto.FormOwnerPets.resources
