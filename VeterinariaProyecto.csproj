@@ -10,7 +10,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="OwnerPetsDB.db" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="340_panda-Photoroom.ico" />
+    <Content Include="OwnerPetsDB.db">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
