@@ -16,7 +16,7 @@ namespace VeterinariaProyecto.Logic
         //Cadena de conexion con la DB
         private static string cadena = ConfigurationManager.ConnectionStrings["cadena"].ConnectionString;
 
-        private static OwnerLogic _instancia = null;
+        private static OwnerLogic? _instancia = null;
 
         //constructor
         public OwnerLogic() {
@@ -47,14 +47,15 @@ namespace VeterinariaProyecto.Logic
             {
                 //trabajar con parametros es lo recomendable para evitar el sqlinyection
                 conexion.Open();
-                string query = "insert into OwnerPet(Nombres,Apellidos,Telefono,Direccion) " +
-                    "values (@nombres,@apellidos,@telefono,@direccion)";
+                string query = "insert into OwnerPet(Nombres,Apellidos,Telefono,Direccion,NombreMascota) " +
+                    "values (@nombres,@apellidos,@telefono,@direccion,@nombreMascota)";
 
                 SQLiteCommand cmd = new SQLiteCommand(query,conexion);
                 cmd.Parameters.Add(new SQLiteParameter("@nombres", obj.Nombres));
                 cmd.Parameters.Add(new SQLiteParameter("@apellidos", obj.Apellidos));
                 cmd.Parameters.Add(new SQLiteParameter("@telefono", obj.Telefono));
                 cmd.Parameters.Add(new SQLiteParameter("@direccion", obj.Direccion));
+                cmd.Parameters.Add(new SQLiteParameter("@nombreMascota", obj.NombreMascota));
                 //Ejecucion de un texto
                 cmd.CommandType = System.Data.CommandType.Text;
 
@@ -86,11 +87,12 @@ namespace VeterinariaProyecto.Logic
                     {
                         oLista.Add(new Owner()
                         {
-                            id = int.Parse(reader["id"].ToString()),
-                            Nombres = reader["Nombres"].ToString(),
-                            Apellidos = reader["Apellidos"].ToString(),
-                            Telefono = reader["Telefono"].ToString(),
-                            Direccion = reader["Direccion"].ToString()
+                            id = Convert.ToInt32(reader["id"] ?? 0),
+                            Nombres = reader["Nombres"]?.ToString() ?? string.Empty,
+                            Apellidos = reader["Apellidos"]?.ToString() ?? string.Empty,
+                            Telefono = reader["Telefono"]?.ToString() ?? string.Empty,
+                            Direccion = reader["Direccion"]?.ToString() ?? string.Empty,
+                            NombreMascota = reader["NombreMascota"]?.ToString() ?? string.Empty
                         });
                     }
                 }
@@ -98,6 +100,66 @@ namespace VeterinariaProyecto.Logic
             return oLista;
                 
         }
+
+        public bool EditOwner(Owner obj)
+        {
+
+            bool resp = true;
+
+            using (SQLiteConnection conexion = new SQLiteConnection(cadena))
+            {
+                //trabajar con parametros es lo recomendable para evitar el sqlinyection
+                conexion.Open();
+                string query = "Update OwnerPet set Nombres = @nombres,Apellidos = @apellidos," +
+                    "Telefono = @telefono,Direccion = @direccion,NombreMascota = @nombreMascota where id = @id";
+
+                SQLiteCommand cmd = new SQLiteCommand(query, conexion);
+                cmd.Parameters.Add(new SQLiteParameter("@id", obj.id));
+                cmd.Parameters.Add(new SQLiteParameter("@nombres", obj.Nombres));
+                cmd.Parameters.Add(new SQLiteParameter("@apellidos", obj.Apellidos));
+                cmd.Parameters.Add(new SQLiteParameter("@telefono", obj.Telefono));
+                cmd.Parameters.Add(new SQLiteParameter("@direccion", obj.Direccion));
+                cmd.Parameters.Add(new SQLiteParameter("@nombreMascota", obj.NombreMascota));
+                //Ejecucion de un texto
+                cmd.CommandType = System.Data.CommandType.Text;
+
+                //ExecuteNonQuery va a retornar el numero de filas afectadas cuando han sido actualizadas
+                //insertadas o elimanadas, si el insert estuvo correcto devolvera un numero mayor a 0(numero de filas afectadas)
+                if (cmd.ExecuteNonQuery() < 1)
+                {
+                    resp = false;
+                }
+            }
+            return resp;
+        }
+
+        public bool DeleteOwner(Owner obj)
+        {
+
+            bool resp = true;
+       
+            using (SQLiteConnection conexion = new SQLiteConnection(cadena))
+            {
+                //trabajar con parametros es lo recomendable para evitar el sqlinyection
+                conexion.Open();
+                string query = "delete from OwnerPet where id = @id";
+
+                SQLiteCommand cmd = new SQLiteCommand(query, conexion);
+                cmd.Parameters.Add(new SQLiteParameter("@id", obj.id));
+                //Ejecucion de un texto
+                cmd.CommandType = System.Data.CommandType.Text;
+
+                //ExecuteNonQuery va a retornar el numero de filas afectadas cuando han sido actualizadas
+                //insertadas o elimanadas, si el insert estuvo correcto devolvera un numero mayor a 0(numero de filas afectadas)
+                if (cmd.ExecuteNonQuery() < 1)
+                {
+                    resp = false;
+                }
+            }
+            return resp;
+        }
+
+
 
     }
 }

@@ -14,8 +14,7 @@ namespace VeterinariaProyecto.Modelo
         public string Apellidos {  get; set; }
         public string Telefono {  get; set; }
         public string Direccion { get; set; }
-        public string Mascota {  get; set; }
-        public int idMascota {  set; get; }
+        public string NombreMascota {  get; set; }
 
     }
 }

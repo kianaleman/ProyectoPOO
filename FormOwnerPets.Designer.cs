@@ -42,6 +42,8 @@
             btnDelete = new Button();
             btnEdit = new Button();
             dgvOwners = new DataGridView();
+            tbNamePet = new TextBox();
+            label6 = new Label();
             ((System.ComponentModel.ISupportInitialize)dgvOwners).BeginInit();
             SuspendLayout();
             // 
@@ -127,7 +129,7 @@
             // 
             // btnSave
             // 
-            btnSave.Location = new Point(401, 118);
+            btnSave.Location = new Point(358, 144);
             btnSave.Name = "btnSave";
             btnSave.Size = new Size(94, 29);
             btnSave.TabIndex = 10;
@@ -137,37 +139,60 @@
             // 
             // btnDelete
             // 
-            btnDelete.Location = new Point(630, 118);
+            btnDelete.Location = new Point(574, 144);
             btnDelete.Name = "btnDelete";
             btnDelete.Size = new Size(94, 29);
             btnDelete.TabIndex = 11;
             btnDelete.Text = "Borrar";
             btnDelete.UseVisualStyleBackColor = true;
+            btnDelete.Click += btnDelete_Click;
             // 
             // btnEdit
             // 
-            btnEdit.Location = new Point(515, 118);
+            btnEdit.Location = new Point(464, 144);
             btnEdit.Name = "btnEdit";
             btnEdit.Size = new Size(94, 29);
             btnEdit.TabIndex = 12;
             btnEdit.Text = "Editar";
             btnEdit.UseVisualStyleBackColor = true;
+            btnEdit.Click += btnEdit_Click;
             // 
             // dgvOwners
             // 
+            dgvOwners.AllowUserToAddRows = false;
+            dgvOwners.AllowUserToDeleteRows = false;
             dgvOwners.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvOwners.Location = new Point(12, 179);
             dgvOwners.Name = "dgvOwners";
+            dgvOwners.ReadOnly = true;
             dgvOwners.RowHeadersWidth = 51;
-            dgvOwners.Size = new Size(776, 259);
+            dgvOwners.Size = new Size(805, 361);
             dgvOwners.TabIndex = 13;
+            // 
+            // tbNamePet
+            // 
+            tbNamePet.Location = new Point(548, 111);
+            tbNamePet.Name = "tbNamePet";
+            tbNamePet.Size = new Size(240, 27);
+            tbNamePet.TabIndex = 15;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(378, 114);
+            label6.Name = "label6";
+            label6.Size = new Size(164, 20);
+            label6.TabIndex = 14;
+            label6.Text = "Nombre de la Mascota:";
             // 
             // FormOwnerPets
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(128, 255, 128);
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(929, 552);
+            Controls.Add(tbNamePet);
+            Controls.Add(label6);
             Controls.Add(dgvOwners);
             Controls.Add(btnEdit);
             Controls.Add(btnDelete);
@@ -182,11 +207,11 @@
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
-            FormBorderStyle = FormBorderStyle.None;
-            MaximizeBox = false;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "FormOwnerPets";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "OwnerPets";
+            Load += FormOwnerPets_Load;
             ((System.ComponentModel.ISupportInitialize)dgvOwners).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -208,5 +233,7 @@
         private Button btnDelete;
         private Button btnEdit;
         private DataGridView dgvOwners;
+        private TextBox tbNamePet;
+        private Label label6;
     }
 }
