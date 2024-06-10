@@ -10,7 +10,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="VetDB.db" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="340_panda-Photoroom.ico" />
+    <Content Include="VetDB.db">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Stub.System.Data.SQLite.Core.NetStandard" Version="1.0.118" />
+    <PackageReference Include="System.Data.SQLite" Version="1.0.118" />
+    <PackageReference Include="System.Data.SQLite.Core" Version="1.0.118" />
+    <PackageReference Include="System.Data.SQLite.EF6" Version="1.0.118" />
   </ItemGroup>
 
   <ItemGroup>
