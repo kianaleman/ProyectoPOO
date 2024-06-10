@@ -16,5 +16,16 @@ namespace VeterinariaProyecto
         {
             InitializeComponent();
         }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnOwnerPet_Click(object sender, EventArgs e)
+        {
+            FormOwnerPets OpenFormOwnerPets = new FormOwnerPets();
+            OpenFormOwnerPets.ShowDialog();
+        }
     }
 }
