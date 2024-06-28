@@ -22,10 +22,33 @@ namespace VeterinariaProyecto
             this.Close();
         }
 
-        private void btnOwnerPet_Click(object sender, EventArgs e)
+        private void btnAddPet_Click(object sender, EventArgs e)
         {
-            FormOwnerPets OpenFormOwnerPets = new FormOwnerPets();
-            OpenFormOwnerPets.ShowDialog();
+            FormAddOwner OpenFormAddOwner = new FormAddOwner();
+            OpenFormAddOwner.ShowDialog();
+        }
+
+        private void btnAddPets_Click(object sender, EventArgs e)
+        {
+            FormsViewPets OpenFormViewPets = new FormsViewPets();
+            OpenFormViewPets.ShowDialog();
+        }
+
+        private void btnRegisterPet_Click(object sender, EventArgs e)
+        {
+            FormRegisterPet OpenFormRegisterPet = new FormRegisterPet();
+            OpenFormRegisterPet.ShowDialog();
+        }
+
+        private void btnSettings_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnAddQuery_Click(object sender, EventArgs e)
+        {
+            FormAddQuery OpenFormAddQuery = new FormAddQuery();
+            OpenFormAddQuery.ShowDialog();
         }
     }
 }
