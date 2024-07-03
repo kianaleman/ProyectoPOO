@@ -39,6 +39,7 @@
             tbUser = new TextBox();
             btnIngreso = new Button();
             errorProvider1 = new ErrorProvider(components);
+            btnExit = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
             SuspendLayout();
@@ -123,12 +124,24 @@
             // 
             errorProvider1.ContainerControl = this;
             // 
+            // btnExit
+            // 
+            btnExit.Font = new Font("Arial", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            btnExit.Location = new Point(694, 409);
+            btnExit.Name = "btnExit";
+            btnExit.Size = new Size(94, 29);
+            btnExit.TabIndex = 8;
+            btnExit.Text = "Salir";
+            btnExit.UseVisualStyleBackColor = true;
+            btnExit.Click += btnExit_Click;
+            // 
             // FormInicioSesion
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(128, 255, 128);
             ClientSize = new Size(800, 450);
+            Controls.Add(btnExit);
             Controls.Add(btnIngreso);
             Controls.Add(tbUser);
             Controls.Add(label4);
@@ -137,7 +150,7 @@
             Controls.Add(label2);
             Controls.Add(pictureBox1);
             Controls.Add(label1);
-            FormBorderStyle = FormBorderStyle.Fixed3D;
+            FormBorderStyle = FormBorderStyle.None;
             Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
             Name = "FormInicioSesion";
@@ -161,5 +174,6 @@
         private TextBox tbUser;
         private Button btnIngreso;
         private ErrorProvider errorProvider1;
+        private Button btnExit;
     }
 }

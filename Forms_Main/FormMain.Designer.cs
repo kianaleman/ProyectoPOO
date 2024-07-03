@@ -38,6 +38,7 @@
             btnExit = new Button();
             btnAddQuery = new Button();
             btnViewQueryVac = new Button();
+            btnSettings = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -115,7 +116,7 @@
             btnExit.BackColor = SystemColors.Info;
             btnExit.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnExit.ForeColor = Color.Brown;
-            btnExit.Location = new Point(35, 352);
+            btnExit.Location = new Point(651, 371);
             btnExit.Name = "btnExit";
             btnExit.Size = new Size(137, 67);
             btnExit.TabIndex = 8;
@@ -141,7 +142,7 @@
             btnViewQueryVac.BackColor = SystemColors.Info;
             btnViewQueryVac.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnViewQueryVac.ForeColor = Color.Brown;
-            btnViewQueryVac.Location = new Point(216, 352);
+            btnViewQueryVac.Location = new Point(216, 354);
             btnViewQueryVac.Name = "btnViewQueryVac";
             btnViewQueryVac.Size = new Size(144, 67);
             btnViewQueryVac.TabIndex = 10;
@@ -149,12 +150,26 @@
             btnViewQueryVac.UseVisualStyleBackColor = false;
             btnViewQueryVac.Click += btnViewQueryVac_Click;
             // 
+            // btnSettings
+            // 
+            btnSettings.BackColor = SystemColors.Info;
+            btnSettings.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
+            btnSettings.ForeColor = Color.Brown;
+            btnSettings.Location = new Point(35, 354);
+            btnSettings.Name = "btnSettings";
+            btnSettings.Size = new Size(137, 67);
+            btnSettings.TabIndex = 11;
+            btnSettings.Text = "Ajustes";
+            btnSettings.UseVisualStyleBackColor = false;
+            btnSettings.Click += btnSettings_Click;
+            // 
             // FormMain
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(128, 255, 128);
             ClientSize = new Size(800, 450);
+            Controls.Add(btnSettings);
             Controls.Add(btnViewQueryVac);
             Controls.Add(btnAddQuery);
             Controls.Add(btnExit);
@@ -186,5 +201,6 @@
         private Button btnExit;
         private Button btnAddQuery;
         private Button btnViewQueryVac;
+        private Button btnSettings;
     }
 }

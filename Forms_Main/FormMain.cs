@@ -40,10 +40,6 @@ namespace VeterinariaProyecto
             OpenFormRegisterPet.ShowDialog();
         }
 
-        private void btnSettings_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void btnAddQuery_Click(object sender, EventArgs e)
         {
@@ -55,6 +51,11 @@ namespace VeterinariaProyecto
         {
             FormViewQueryVaccine OpenFormViewQueryVaccine = new FormViewQueryVaccine();
             OpenFormViewQueryVaccine.ShowDialog();
+        }
+
+        private void btnSettings_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
