@@ -32,12 +32,12 @@
             label1 = new Label();
             pictureBox1 = new PictureBox();
             label2 = new Label();
-            btnOwnerPet = new Button();
-            AddPet = new Button();
-            btnAddQuery = new Button();
-            btnAddPet = new Button();
-            btnSettings = new Button();
+            btnRegisterOwner = new Button();
+            btnRegisterPet = new Button();
+            btnViewPets = new Button();
             btnExit = new Button();
+            btnAddQuery = new Button();
+            btnViewQueryVac = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -71,73 +71,51 @@
             label2.TabIndex = 2;
             label2.Text = "Seleccione una de las siguientes opciones:";
             // 
-            // btnOwnerPet
+            // btnRegisterOwner
             // 
-            btnOwnerPet.BackColor = SystemColors.Info;
-            btnOwnerPet.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnOwnerPet.ForeColor = Color.Brown;
-            btnOwnerPet.Location = new Point(35, 165);
-            btnOwnerPet.Name = "btnOwnerPet";
-            btnOwnerPet.Size = new Size(137, 67);
-            btnOwnerPet.TabIndex = 3;
-            btnOwnerPet.Text = "Dueños de Mascotas";
-            btnOwnerPet.UseVisualStyleBackColor = false;
-            btnOwnerPet.Click += btnOwnerPet_Click;
+            btnRegisterOwner.BackColor = SystemColors.Info;
+            btnRegisterOwner.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnRegisterOwner.ForeColor = Color.Brown;
+            btnRegisterOwner.Location = new Point(35, 165);
+            btnRegisterOwner.Name = "btnRegisterOwner";
+            btnRegisterOwner.Size = new Size(137, 67);
+            btnRegisterOwner.TabIndex = 3;
+            btnRegisterOwner.Text = "Registrar Dueño";
+            btnRegisterOwner.UseVisualStyleBackColor = false;
+            btnRegisterOwner.Click += btnAddPet_Click;
             // 
-            // AddPet
+            // btnRegisterPet
             // 
-            AddPet.BackColor = SystemColors.Info;
-            AddPet.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
-            AddPet.ForeColor = Color.Brown;
-            AddPet.Location = new Point(216, 261);
-            AddPet.Name = "AddPet";
-            AddPet.Size = new Size(137, 67);
-            AddPet.TabIndex = 4;
-            AddPet.Text = "Editar Mascotas";
-            AddPet.UseVisualStyleBackColor = false;
+            btnRegisterPet.BackColor = SystemColors.Info;
+            btnRegisterPet.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
+            btnRegisterPet.ForeColor = Color.Brown;
+            btnRegisterPet.Location = new Point(216, 165);
+            btnRegisterPet.Name = "btnRegisterPet";
+            btnRegisterPet.Size = new Size(137, 67);
+            btnRegisterPet.TabIndex = 5;
+            btnRegisterPet.Text = "Registrar Mascota";
+            btnRegisterPet.UseVisualStyleBackColor = false;
+            btnRegisterPet.Click += btnRegisterPet_Click;
             // 
-            // btnAddQuery
+            // btnViewPets
             // 
-            btnAddQuery.BackColor = SystemColors.Info;
-            btnAddQuery.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
-            btnAddQuery.ForeColor = Color.Brown;
-            btnAddQuery.Location = new Point(216, 165);
-            btnAddQuery.Name = "btnAddQuery";
-            btnAddQuery.Size = new Size(137, 67);
-            btnAddQuery.TabIndex = 5;
-            btnAddQuery.Text = "Agregar Consulta";
-            btnAddQuery.UseVisualStyleBackColor = false;
-            // 
-            // btnAddPet
-            // 
-            btnAddPet.BackColor = SystemColors.Info;
-            btnAddPet.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnAddPet.ForeColor = Color.Brown;
-            btnAddPet.Location = new Point(35, 261);
-            btnAddPet.Name = "btnAddPet";
-            btnAddPet.Size = new Size(137, 67);
-            btnAddPet.TabIndex = 6;
-            btnAddPet.Text = "Añadir Mascota";
-            btnAddPet.UseVisualStyleBackColor = false;
-            // 
-            // btnSettings
-            // 
-            btnSettings.BackColor = SystemColors.Info;
-            btnSettings.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
-            btnSettings.ForeColor = Color.Brown;
-            btnSettings.Location = new Point(35, 350);
-            btnSettings.Name = "btnSettings";
-            btnSettings.Size = new Size(137, 67);
-            btnSettings.TabIndex = 7;
-            btnSettings.Text = "Ajustes";
-            btnSettings.UseVisualStyleBackColor = false;
+            btnViewPets.BackColor = SystemColors.Info;
+            btnViewPets.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnViewPets.ForeColor = Color.Brown;
+            btnViewPets.Location = new Point(35, 261);
+            btnViewPets.Name = "btnViewPets";
+            btnViewPets.Size = new Size(137, 67);
+            btnViewPets.TabIndex = 6;
+            btnViewPets.Text = "Ver Mascotas/Dueño";
+            btnViewPets.UseVisualStyleBackColor = false;
+            btnViewPets.Click += btnAddPets_Click;
             // 
             // btnExit
             // 
             btnExit.BackColor = SystemColors.Info;
             btnExit.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnExit.ForeColor = Color.Brown;
-            btnExit.Location = new Point(216, 350);
+            btnExit.Location = new Point(35, 352);
             btnExit.Name = "btnExit";
             btnExit.Size = new Size(137, 67);
             btnExit.TabIndex = 8;
@@ -145,18 +123,44 @@
             btnExit.UseVisualStyleBackColor = false;
             btnExit.Click += btnExit_Click;
             // 
+            // btnAddQuery
+            // 
+            btnAddQuery.BackColor = SystemColors.Info;
+            btnAddQuery.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
+            btnAddQuery.ForeColor = Color.Brown;
+            btnAddQuery.Location = new Point(216, 261);
+            btnAddQuery.Name = "btnAddQuery";
+            btnAddQuery.Size = new Size(137, 67);
+            btnAddQuery.TabIndex = 9;
+            btnAddQuery.Text = "Agregar Consulta";
+            btnAddQuery.UseVisualStyleBackColor = false;
+            btnAddQuery.Click += btnAddQuery_Click;
+            // 
+            // btnViewQueryVac
+            // 
+            btnViewQueryVac.BackColor = SystemColors.Info;
+            btnViewQueryVac.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
+            btnViewQueryVac.ForeColor = Color.Brown;
+            btnViewQueryVac.Location = new Point(216, 352);
+            btnViewQueryVac.Name = "btnViewQueryVac";
+            btnViewQueryVac.Size = new Size(144, 67);
+            btnViewQueryVac.TabIndex = 10;
+            btnViewQueryVac.Text = "Ver Consultas/Vacunas";
+            btnViewQueryVac.UseVisualStyleBackColor = false;
+            btnViewQueryVac.Click += btnViewQueryVac_Click;
+            // 
             // FormMain
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(128, 255, 128);
             ClientSize = new Size(800, 450);
-            Controls.Add(btnExit);
-            Controls.Add(btnSettings);
-            Controls.Add(btnAddPet);
+            Controls.Add(btnViewQueryVac);
             Controls.Add(btnAddQuery);
-            Controls.Add(AddPet);
-            Controls.Add(btnOwnerPet);
+            Controls.Add(btnExit);
+            Controls.Add(btnViewPets);
+            Controls.Add(btnRegisterPet);
+            Controls.Add(btnRegisterOwner);
             Controls.Add(label2);
             Controls.Add(pictureBox1);
             Controls.Add(label1);
@@ -176,11 +180,11 @@
         private Label label1;
         private PictureBox pictureBox1;
         private Label label2;
-        private Button btnOwnerPet;
-        private Button AddPet;
-        private Button btnAddQuery;
-        private Button btnAddPet;
-        private Button btnSettings;
+        private Button btnRegisterOwner;
+        private Button btnRegisterPet;
+        private Button btnViewPets;
         private Button btnExit;
+        private Button btnAddQuery;
+        private Button btnViewQueryVac;
     }
 }

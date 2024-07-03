@@ -11,22 +11,12 @@ using System.Data.SQLite;
 namespace VeterinariaProyecto.Logic
 {
 
-    public class OwnerLogic
+    public class OwnerLogic : DataAccess<Owner>
     {
-        //Cadena de conexion con la DB
-        private static string cadena = ConfigurationManager.ConnectionStrings["cadena"].ConnectionString;
-
         private static OwnerLogic? _instancia = null;
 
-        //constructor
-        public OwnerLogic() {
-        
-        }
+        private OwnerLogic() { }
 
-        //metodo que permite hacer una instancia la clase OwnerLogic
-        //Patron de diseño Singleton
-        //Singleton es un patrón de diseño creacional que garantiza que tan solo exista un objeto de su tipo
-        //y proporciona un único punto de acceso a él para cualquier otro código
         public static OwnerLogic Instancia
         {
             get
@@ -38,128 +28,200 @@ namespace VeterinariaProyecto.Logic
                 return _instancia;
             }
         }
-        
-        public bool SaveOwner(Owner obj) {
 
-            bool resp = true;
-
-            using (SQLiteConnection conexion  = new SQLiteConnection(cadena))
+        public bool SaveOwner(Owner obj)
+        {
+            string query = "INSERT INTO OwnerPet(Nombres, Apellidos, Telefono, Direccion, Identificacion) " +
+                           "VALUES (@nombres, @apellidos, @telefono, @direccion, @identificacion)";
+            SQLiteParameter[] parameters =
             {
-                //trabajar con parametros es lo recomendable para evitar el sqlinyection
-                conexion.Open();
-                string query = "insert into OwnerPet(Nombres,Apellidos,Telefono,Direccion,NombreMascota) " +
-                    "values (@nombres,@apellidos,@telefono,@direccion,@nombreMascota)";
+                new SQLiteParameter("@nombres", obj.Nombres),
+                new SQLiteParameter("@apellidos", obj.Apellidos),
+                new SQLiteParameter("@telefono", obj.Telefono),
+                new SQLiteParameter("@direccion", obj.Direccion),
+                new SQLiteParameter("@identificacion", obj.Identificacion)
+            };
 
-                SQLiteCommand cmd = new SQLiteCommand(query,conexion);
-                cmd.Parameters.Add(new SQLiteParameter("@nombres", obj.Nombres));
-                cmd.Parameters.Add(new SQLiteParameter("@apellidos", obj.Apellidos));
-                cmd.Parameters.Add(new SQLiteParameter("@telefono", obj.Telefono));
-                cmd.Parameters.Add(new SQLiteParameter("@direccion", obj.Direccion));
-                cmd.Parameters.Add(new SQLiteParameter("@nombreMascota", obj.NombreMascota));
-                //Ejecucion de un texto
-                cmd.CommandType = System.Data.CommandType.Text;
-
-                //ExecuteNonQuery va a retornar el numero de filas afectadas cuando han sido actualizadas
-                //insertadas o elimanadas, si el insert estuvo correcto devolvera un numero mayor a 0(numero de filas afectadas)
-                if (cmd.ExecuteNonQuery() < 1)
-                {
-                    resp = false;   
-                }
+            try
+            {
+                return Save(obj, query, parameters);
             }
-            return resp;
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al guardar el propietario {obj.Nombres} {obj.Apellidos}: {ex.Message}");
+                return false;
+            }
         }
 
-        public List<Owner> Listar() {
-            List<Owner> oLista = new List<Owner>();
 
-            using (SQLiteConnection conexion = new SQLiteConnection(cadena))
+        public List<Owner> ListarOwners()
+        {
+            string query = "SELECT * FROM OwnerPet";
+
+            try
             {
-                //se leera lo de la db
-                conexion.Open();
-                string query = "select * from OwnerPet";
-                SQLiteCommand cmd = new SQLiteCommand(query, conexion);
-                cmd.CommandType = System.Data.CommandType.Text;
-
-                //using sirve para ejecutar dentro de el lineas de codigo, luego todo pasara al olvido
-                using(SQLiteDataReader reader = cmd.ExecuteReader())
+                return Listar(query, reader => new Owner()
                 {
-                    while (reader.Read())
-                    {
-                        oLista.Add(new Owner()
-                        {
-                            id = Convert.ToInt32(reader["id"] ?? 0),
-                            Nombres = reader["Nombres"]?.ToString() ?? string.Empty,
-                            Apellidos = reader["Apellidos"]?.ToString() ?? string.Empty,
-                            Telefono = reader["Telefono"]?.ToString() ?? string.Empty,
-                            Direccion = reader["Direccion"]?.ToString() ?? string.Empty,
-                            NombreMascota = reader["NombreMascota"]?.ToString() ?? string.Empty
-                        });
-                    }
-                }
+                    id = Convert.ToInt32(reader["id"] ?? 0),
+                    Nombres = reader["Nombres"]?.ToString() ?? string.Empty,
+                    Apellidos = reader["Apellidos"]?.ToString() ?? string.Empty,
+                    Telefono = reader["Telefono"]?.ToString() ?? string.Empty,
+                    Direccion = reader["Direccion"]?.ToString() ?? string.Empty,
+                    Identificacion = reader["Identificacion"]?.ToString() ?? string.Empty
+                });
             }
-            return oLista;
-                
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al listar propietarios: {ex.Message}");
+                return new List<Owner>();
+            }
         }
+
 
         public bool EditOwner(Owner obj)
         {
-
-            bool resp = true;
-
-            using (SQLiteConnection conexion = new SQLiteConnection(cadena))
+            string query = "UPDATE OwnerPet SET Nombres = @nombres, Apellidos = @apellidos, " +
+                           "Telefono = @telefono, Direccion = @direccion, Identificacion = @identificacion " +
+                           "WHERE id = @id";
+            SQLiteParameter[] parameters = 
             {
-                //trabajar con parametros es lo recomendable para evitar el sqlinyection
-                conexion.Open();
-                string query = "Update OwnerPet set Nombres = @nombres,Apellidos = @apellidos," +
-                    "Telefono = @telefono,Direccion = @direccion,NombreMascota = @nombreMascota where id = @id";
+                new SQLiteParameter("@id", obj.id),
+                new SQLiteParameter("@nombres", obj.Nombres),
+                new SQLiteParameter("@apellidos", obj.Apellidos),
+                new SQLiteParameter("@telefono", obj.Telefono),
+                new SQLiteParameter("@direccion", obj.Direccion),
+                new SQLiteParameter("@identificacion", obj.Identificacion)
+            };
 
-                SQLiteCommand cmd = new SQLiteCommand(query, conexion);
-                cmd.Parameters.Add(new SQLiteParameter("@id", obj.id));
-                cmd.Parameters.Add(new SQLiteParameter("@nombres", obj.Nombres));
-                cmd.Parameters.Add(new SQLiteParameter("@apellidos", obj.Apellidos));
-                cmd.Parameters.Add(new SQLiteParameter("@telefono", obj.Telefono));
-                cmd.Parameters.Add(new SQLiteParameter("@direccion", obj.Direccion));
-                cmd.Parameters.Add(new SQLiteParameter("@nombreMascota", obj.NombreMascota));
-                //Ejecucion de un texto
-                cmd.CommandType = System.Data.CommandType.Text;
-
-                //ExecuteNonQuery va a retornar el numero de filas afectadas cuando han sido actualizadas
-                //insertadas o elimanadas, si el insert estuvo correcto devolvera un numero mayor a 0(numero de filas afectadas)
-                if (cmd.ExecuteNonQuery() < 1)
-                {
-                    resp = false;
-                }
+            try
+            {
+                return Edit(obj, query, parameters);
             }
-            return resp;
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al editar el propietario con id {obj.id}: {ex.Message}");
+                return false;
+            }
         }
+
 
         public bool DeleteOwner(Owner obj)
         {
+            string query = "DELETE FROM OwnerPet WHERE id = @id";
 
-            bool resp = true;
-       
-            using (SQLiteConnection conexion = new SQLiteConnection(cadena))
+            try
             {
-                //trabajar con parametros es lo recomendable para evitar el sqlinyection
-                conexion.Open();
-                string query = "delete from OwnerPet where id = @id";
-
-                SQLiteCommand cmd = new SQLiteCommand(query, conexion);
-                cmd.Parameters.Add(new SQLiteParameter("@id", obj.id));
-                //Ejecucion de un texto
-                cmd.CommandType = System.Data.CommandType.Text;
-
-                //ExecuteNonQuery va a retornar el numero de filas afectadas cuando han sido actualizadas
-                //insertadas o elimanadas, si el insert estuvo correcto devolvera un numero mayor a 0(numero de filas afectadas)
-                if (cmd.ExecuteNonQuery() < 1)
-                {
-                    resp = false;
-                }
+                return Delete(obj.id, query);
             }
-            return resp;
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al eliminar el propietario con id {obj.id}: {ex.Message}");
+                return false;
+            }
         }
 
 
+        public int SearchOwner(string identificacion)
+        {
+            int ownerId = -1;
+
+            try
+            {
+                using (SQLiteConnection conexion = new SQLiteConnection(cadena))
+                {
+                    conexion.Open();
+                    string query = "SELECT id FROM OwnerPet WHERE Identificacion = @identificacion LIMIT 1";
+                    using (SQLiteCommand cmd = new SQLiteCommand(query, conexion))
+                    {
+                        cmd.Parameters.Add(new SQLiteParameter("@identificacion", identificacion));
+                        cmd.CommandType = System.Data.CommandType.Text;
+                        object result = cmd.ExecuteScalar();
+                        if (result != null && result != DBNull.Value)
+                        {
+                            ownerId = Convert.ToInt32(result);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al buscar owner: {ex.Message}");
+            }
+
+            return ownerId;
+        }
+
+        public List<Owner> ListarOwners(int ownerId)
+        {
+            string query = "SELECT * FROM OwnerPet WHERE id = @ownerId";
+            SQLiteParameter[] parameters = 
+            {
+                new SQLiteParameter("@ownerId", ownerId)
+            };
+
+            try
+            {
+                return Listar(query, parameters, reader => new Owner()
+                {
+                    id = Convert.ToInt32(reader["id"] ?? 0),
+                    Nombres = reader["Nombres"]?.ToString() ?? string.Empty,
+                    Apellidos = reader["Apellidos"]?.ToString() ?? string.Empty,
+                    Telefono = reader["Telefono"]?.ToString() ?? string.Empty,
+                    Direccion = reader["Direccion"]?.ToString() ?? string.Empty,
+                    Identificacion = reader["Identificacion"]?.ToString() ?? string.Empty
+                });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al listar propietarios con id {ownerId}: {ex.Message}");
+                return new List<Owner>();
+            }
+        }
+
+
+        public Owner ObtenerOwnerPorId(int idOwner)
+        {
+            Owner owner = null;
+            string query = "SELECT id, Nombres, Apellidos, Telefono, Direccion, Identificacion " +
+                           "FROM OwnerPet " +
+                           "WHERE id = @id";
+
+            SQLiteParameter parameter = new SQLiteParameter("@id", idOwner);
+
+            try
+            {
+                using (SQLiteConnection conexion = new SQLiteConnection(cadena))
+                {
+                    conexion.Open();
+                    using (SQLiteCommand cmd = new SQLiteCommand(query, conexion))
+                    {
+                        cmd.Parameters.Add(parameter);
+
+                        using (SQLiteDataReader reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                owner = new Owner
+                                {
+                                    id = Convert.ToInt32(reader["id"] ?? 0),
+                                    Nombres = reader["Nombres"]?.ToString() ?? string.Empty,
+                                    Apellidos = reader["Apellidos"]?.ToString() ?? string.Empty,
+                                    Telefono = reader["Telefono"]?.ToString() ?? string.Empty,
+                                    Direccion = reader["Direccion"]?.ToString() ?? string.Empty,
+                                    Identificacion = reader["Identificacion"]?.ToString() ?? string.Empty
+                                };
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al obtener el propietario por ID: {ex.Message}");
+            }
+
+            return owner;
+        }
 
     }
 }

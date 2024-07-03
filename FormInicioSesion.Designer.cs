@@ -123,7 +123,7 @@
             // 
             errorProvider1.ContainerControl = this;
             // 
-            // InicioSesion
+            // FormInicioSesion
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -140,10 +140,10 @@
             FormBorderStyle = FormBorderStyle.Fixed3D;
             Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
-            Name = "InicioSesion";
+            Name = "FormInicioSesion";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Veterinaria El POO";
-            Load += Form1_Load;
+            Load += FormInicioSesion_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
             ResumeLayout(false);
