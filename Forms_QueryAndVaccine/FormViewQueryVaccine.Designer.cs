@@ -98,6 +98,8 @@
             dgvVaccine.RowHeadersWidth = 51;
             dgvVaccine.Size = new Size(249, 367);
             dgvVaccine.TabIndex = 5;
+            dgvVaccine.CellContentClick += dgvVaccine_CellContentClick;
+            dgvVaccine.CellDoubleClick += dgvVaccine_CellDoubleClick;
             // 
             // tbIdOwner
             // 

@@ -276,5 +276,43 @@ namespace VeterinariaProyecto
         {
 
         }
+
+        private void dgvVaccine_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow row = dgvQuery.Rows[e.RowIndex];
+                FormEditQueryAndVaccine editQueryForm = new FormEditQueryAndVaccine();
+                editQueryForm.SetData(row);
+
+                if (editQueryForm.ShowDialog() == DialogResult.OK)
+                {
+                    Vaccine updatedVaccine = editQueryForm.GetUpdatedDataVaccine();
+                    bool success = VaccineLogic.Instancia.EditVaccine(updatedVaccine);
+
+                    if (success)
+                    {
+                        UpdateRowVaccine(row, updatedVaccine);
+                        MessageBox.Show("Consulta actualizada exitosamente.");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error al actualizar la consulta.");
+                    }
+                }
+            }
+        }
+        public void UpdateRowVaccine(DataGridViewRow row, Vaccine updatedVaccine)
+        {
+            row.Cells["Vacuna"].Value = updatedVaccine.tipoVacuna;
+            row.Cells["Fecha"].Value = updatedVaccine.fecha.ToString("yyyy-MM-dd");
+            row.Cells["Mascota"].Value = updatedVaccine.nombreMascota;
+        }
+
+
+        private void dgvVaccine_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

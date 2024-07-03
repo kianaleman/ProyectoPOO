@@ -343,6 +343,7 @@
             dgvPets.RowHeadersWidth = 51;
             dgvPets.Size = new Size(319, 115);
             dgvPets.TabIndex = 61;
+            dgvPets.CellContentClick += dgvPets_CellContentClick;
             // 
             // tbIdOwner
             // 

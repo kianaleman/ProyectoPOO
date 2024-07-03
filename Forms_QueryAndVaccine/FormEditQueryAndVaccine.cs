@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using VeterinariaProyecto.Modelo;
 
+
 namespace VeterinariaProyecto.Forms_QueryAndVaccine
 {
     public partial class FormEditQueryAndVaccine : Form
@@ -23,6 +24,17 @@ namespace VeterinariaProyecto.Forms_QueryAndVaccine
 
         public void SetData(DataGridViewRow row)
         {
+
+            var columns = new List<(string DataPropertyName, string HeaderText)>
+            {
+                ("motivo", "Motivo"),
+                ("tratamiento", "Tratamiento"),
+                ("sintomas", "Sintomas"),
+                ("examenFisico", "Examen"),
+                ("observaciones", "Observaciones"),
+                ("fecha", "Fecha"),
+                ("nombreMascota", "Mascota")
+            };
             originalRow = row;
 
             tbMotivo.Text = row.Cells["Motivo"].Value.ToString();
@@ -44,6 +56,34 @@ namespace VeterinariaProyecto.Forms_QueryAndVaccine
                 sintomas = tbSintomas.Text,
                 examenFisico = tbExamen.Text,
                 observaciones = tbObservaciones.Text
+            };
+        }
+
+        public void SetDataVaccine(DataGridViewRow row)
+        {
+
+            var columns = new List<(string DataPropertyName, string HeaderText)>
+            {
+                ("tipoVacuna", "Vacuna"),
+                ("fecha", "Fecha")
+            };
+            originalRow = row;
+
+
+            tbTypeVaccine.Text = row.Cells["Vacuna"].Value.ToString();
+            tbDate.Text = Convert.ToDateTime(row.Cells["Fecha"].Value).ToString("yyyy-MM-dd");
+        }
+
+        public Vaccine GetUpdatedDataVaccine()
+        {
+            return new Vaccine
+            {
+                id = Convert.ToInt32(originalRow.Cells["id"].Value),
+                tipoVacuna = tbTypeVaccine.Text,
+                fecha = Convert.ToDateTime(tbDate.Text),
+                nombreMascota = originalRow.Cells["Mascota"].Value.ToString()
+
+
             };
         }
 
@@ -127,5 +167,29 @@ namespace VeterinariaProyecto.Forms_QueryAndVaccine
             DialogResult = DialogResult.OK;
             Close();
         }
+
+      
+            private void dgvPets_CellContentClick(object sender, DataGridViewCellEventArgs e)
+            {
+                if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+                {
+                    // Se obtiene el valor seleccionado
+                    object cellValue = dgvPets.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
+
+                    // Se valida que no sea nulo y que sea entero, en el caso que sea entero se asigna el valor a una TextBox
+                    if (cellValue != null && int.TryParse(cellValue.ToString(), out int intValue))
+                    {
+                        tbIdPet.Text = intValue.ToString();
+                    }
+                    // En el caso contrario no se asigna nada, o se limpia
+                    else
+                    {
+                        tbIdPet.Text = string.Empty;
+                    }
+                }
+            }
+        
+
+
     }
 }
