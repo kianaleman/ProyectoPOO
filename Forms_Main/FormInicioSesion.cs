@@ -54,7 +54,11 @@ namespace VeterinariaProyecto
 
         private void FormInicioSesion_Load(object sender, EventArgs e)
         {
-            tbUser.Focus();
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }
