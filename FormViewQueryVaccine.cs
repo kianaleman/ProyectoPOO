@@ -233,24 +233,5 @@ namespace VeterinariaProyecto
 
             shouldRestartTimer = true;
         }
-
-        private void btnEdit_Click(object sender, EventArgs e)
-        {
-            EnableEditingForDataGridView(dgvVaccine);
-            EnableEditingForDataGridView(dgvQuery);
-        }
-
-        private void EnableEditingForDataGridView(DataGridView dgv)
-        {
-            // Configura el DataGridView para permitir la edición
-            dgv.ReadOnly = false;
-            dgv.EditMode = DataGridViewEditMode.EditOnKeystrokeOrF2; // Configura el modo de edición
-
-            // Configura columnas específicas para permitir la edición
-            foreach (DataGridViewColumn column in dgv.Columns)
-            {
-                column.ReadOnly = false; // Permite la edición de esta columna
-            }
-        }
     }
 }
