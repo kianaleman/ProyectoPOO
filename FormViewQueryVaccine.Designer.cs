@@ -38,7 +38,6 @@
             errorProvider1 = new ErrorProvider(components);
             btnSearchQuery = new Button();
             btnVerTodo = new Button();
-            btnEdit = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvQuery).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvVaccine).BeginInit();
             ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
@@ -141,23 +140,12 @@
             btnVerTodo.UseVisualStyleBackColor = true;
             btnVerTodo.Click += btnVerTodo_Click;
             // 
-            // btnEdit
-            // 
-            btnEdit.Location = new Point(627, 76);
-            btnEdit.Name = "btnEdit";
-            btnEdit.Size = new Size(127, 31);
-            btnEdit.TabIndex = 10;
-            btnEdit.Text = "Editar";
-            btnEdit.UseVisualStyleBackColor = true;
-            btnEdit.Click += btnEdit_Click;
-            // 
             // FormViewQueryVaccine
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(128, 255, 128);
             ClientSize = new Size(1151, 556);
-            Controls.Add(btnEdit);
             Controls.Add(btnVerTodo);
             Controls.Add(btnSearchQuery);
             Controls.Add(cmbPets);
@@ -189,6 +177,5 @@
         private ErrorProvider errorProvider1;
         private Button btnSearchQuery;
         private Button btnVerTodo;
-        private Button btnEdit;
     }
 }
