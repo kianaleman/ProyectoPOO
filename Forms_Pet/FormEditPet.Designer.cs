@@ -1,6 +1,6 @@
 ﻿namespace VeterinariaProyecto
 {
-    partial class FormEditPet
+    partial class FormEditQuery
     {
         /// <summary>
         /// Required designer variable.

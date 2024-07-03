@@ -185,6 +185,7 @@
             tbMotivo.Name = "tbMotivo";
             tbMotivo.Size = new Size(264, 69);
             tbMotivo.TabIndex = 13;
+            tbMotivo.TextChanged += tbMotivo_TextChanged;
             // 
             // tbObservaciones
             // 

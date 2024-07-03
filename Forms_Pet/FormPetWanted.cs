@@ -161,7 +161,7 @@ namespace VeterinariaProyecto
                 if (idOwnerFromPet == ownerID)
                 {
                     // Si los idOwner coinciden, abrir el formulario de edición
-                    FormEditPet OpenFormEditPet = new FormEditPet(idPet, identificacionOwner);
+                    FormEditQuery OpenFormEditPet = new FormEditQuery(idPet, identificacionOwner);
                     OpenFormEditPet.ShowDialog();
                     mostrar_Pets();
                 }

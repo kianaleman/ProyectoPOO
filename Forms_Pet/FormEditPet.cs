@@ -13,10 +13,10 @@ using VeterinariaProyecto.Utilities;
 
 namespace VeterinariaProyecto
 {
-    public partial class FormEditPet : Form
+    public partial class FormEditQuery : Form
     {
         private Pet currentPet;
-        public FormEditPet(int idPet, String identificacionOwner)
+        public FormEditQuery(int idPet, String identificacionOwner)
         {
             InitializeComponent();
 

@@ -25,6 +25,9 @@
     <Compile Update="Forms_Pet\FormsViewPets.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Forms_QueryAndVaccine\FormEditQueryAndVaccine.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Forms_QueryAndVaccine\FormViewQueryVaccine.cs">
       <SubType>Form</SubType>
     </Compile>

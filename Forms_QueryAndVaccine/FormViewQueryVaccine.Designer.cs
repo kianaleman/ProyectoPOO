@@ -79,6 +79,8 @@
             dgvQuery.RowHeadersWidth = 51;
             dgvQuery.Size = new Size(678, 367);
             dgvQuery.TabIndex = 4;
+            dgvQuery.CellContentClick += dgvQuery_CellContentClick;
+            dgvQuery.CellDoubleClick += dgvQuery_CellDoubleClick;
             // 
             // dgvVaccine
             // 

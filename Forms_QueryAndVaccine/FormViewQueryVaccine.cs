@@ -8,7 +8,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using VeterinariaProyecto.Forms_QueryAndVaccine;
 using VeterinariaProyecto.Logic;
+using VeterinariaProyecto.Modelo;
 using VeterinariaProyecto.Utilities;
 
 namespace VeterinariaProyecto
@@ -232,6 +234,47 @@ namespace VeterinariaProyecto
             }
 
             shouldRestartTimer = true;
+        }
+
+
+        private void dgvQuery_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow row = dgvQuery.Rows[e.RowIndex];
+                FormEditQueryAndVaccine editQueryForm = new FormEditQueryAndVaccine();
+                editQueryForm.SetData(row);
+
+                if (editQueryForm.ShowDialog() == DialogResult.OK)
+                {
+                    Query updatedQuery = editQueryForm.GetUpdatedData();
+                    bool success = QueryLogic.Instancia.EditQuery(updatedQuery);
+
+                    if (success)
+                    {
+                        UpdateRow(row, updatedQuery);
+                        MessageBox.Show("Consulta actualizada exitosamente.");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error al actualizar la consulta.");
+                    }
+                }
+            }
+        }
+        public void UpdateRow(DataGridViewRow row, Query updatedQuery)
+        {
+            row.Cells["Motivo"].Value = updatedQuery.motivo;
+            row.Cells["Tratamiento"].Value = updatedQuery.tratamiento;
+            row.Cells["Sintomas"].Value = updatedQuery.sintomas;
+            row.Cells["Examen"].Value = updatedQuery.examenFisico;
+            row.Cells["Observaciones"].Value = updatedQuery.observaciones;
+            row.Cells["Fecha"].Value = updatedQuery.fecha.ToString("yyyy-MM-dd");
+        }
+
+        private void dgvQuery_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }
