@@ -151,6 +151,7 @@
             tbDate.ReadOnly = true;
             tbDate.Size = new Size(140, 27);
             tbDate.TabIndex = 10;
+            tbDate.TextChanged += tbDate_TextChanged;
             // 
             // label5
             // 

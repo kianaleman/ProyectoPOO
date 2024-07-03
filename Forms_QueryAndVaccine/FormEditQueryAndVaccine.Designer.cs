@@ -49,7 +49,6 @@
             tbMotivo = new TextBox();
             tbSintomas = new TextBox();
             label6 = new Label();
-            tbDate = new TextBox();
             label5 = new Label();
             label4 = new Label();
             tbIdPet = new TextBox();
@@ -59,6 +58,7 @@
             btnSearchPets = new Button();
             dgvPets = new DataGridView();
             tbIdOwner = new TextBox();
+            dateTimePicker1 = new DateTimePicker();
             gpVaccine.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvPets).BeginInit();
             SuspendLayout();
@@ -254,19 +254,10 @@
             label6.TabIndex = 41;
             label6.Text = "Sintomas";
             // 
-            // tbDate
-            // 
-            tbDate.Location = new Point(1076, 67);
-            tbDate.Name = "tbDate";
-            tbDate.ReadOnly = true;
-            tbDate.Size = new Size(140, 27);
-            tbDate.TabIndex = 40;
-            tbDate.TextChanged += tbDate_TextChanged;
-            // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(1013, 70);
+            label5.Location = new Point(1019, 304);
             label5.Name = "label5";
             label5.Size = new Size(57, 20);
             label5.TabIndex = 39;
@@ -354,11 +345,19 @@
             tbIdOwner.TabIndex = 60;
             tbIdOwner.TextChanged += tbIdOwner_TextChanged;
             // 
+            // dateTimePicker1
+            // 
+            dateTimePicker1.Location = new Point(990, 327);
+            dateTimePicker1.Name = "dateTimePicker1";
+            dateTimePicker1.Size = new Size(250, 27);
+            dateTimePicker1.TabIndex = 63;
+            // 
             // FormEditQueryAndVaccine
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1245, 521);
+            Controls.Add(dateTimePicker1);
             Controls.Add(btnSearchPets);
             Controls.Add(dgvPets);
             Controls.Add(tbIdOwner);
@@ -380,7 +379,6 @@
             Controls.Add(tbMotivo);
             Controls.Add(tbSintomas);
             Controls.Add(label6);
-            Controls.Add(tbDate);
             Controls.Add(label5);
             Controls.Add(label4);
             Controls.Add(tbIdPet);
@@ -420,7 +418,6 @@
         private TextBox tbMotivo;
         private TextBox tbSintomas;
         private Label label6;
-        private TextBox tbDate;
         private Label label5;
         private Label label4;
         private TextBox tbIdPet;
@@ -430,5 +427,6 @@
         private Button btnSearchPets;
         private DataGridView dgvPets;
         private TextBox tbIdOwner;
+        private DateTimePicker dateTimePicker1;
     }
 }

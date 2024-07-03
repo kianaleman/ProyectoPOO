@@ -25,65 +25,86 @@ namespace VeterinariaProyecto.Forms_QueryAndVaccine
         public void SetData(DataGridViewRow row)
         {
 
-            var columns = new List<(string DataPropertyName, string HeaderText)>
+            var requiredColumns = new List<string>
+    {
+        "Motivo",
+        "Tratamiento",
+        "Sintomas",
+        "Examen",
+        "Observaciones",
+        "Fecha"
+    };
+
+            foreach (var columnName in requiredColumns)
             {
-                ("motivo", "Motivo"),
-                ("tratamiento", "Tratamiento"),
-                ("sintomas", "Sintomas"),
-                ("examenFisico", "Examen"),
-                ("observaciones", "Observaciones"),
-                ("fecha", "Fecha"),
-                ("nombreMascota", "Mascota")
-            };
-            originalRow = row;
+                if (!row.DataGridView.Columns.Contains(columnName))
+                {
+                    MessageBox.Show($"La columna {columnName} no se encontró en el DataGridView.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            }
 
             tbMotivo.Text = row.Cells["Motivo"].Value.ToString();
             tbTratamiento.Text = row.Cells["Tratamiento"].Value.ToString();
             tbSintomas.Text = row.Cells["Sintomas"].Value.ToString();
             tbExamen.Text = row.Cells["Examen"].Value.ToString();
             tbObservaciones.Text = row.Cells["Observaciones"].Value.ToString();
-            tbDate.Text = Convert.ToDateTime(row.Cells["Fecha"].Value).ToString("yyyy-MM-dd");
+            dateTimePicker1.Text = Convert.ToDateTime(row.Cells["Fecha"].Value).ToString("yyyy-MM-dd");
+
         }
 
         public Query GetUpdatedData()
         {
-            return new Query
+            Query objeto = new Query
             {
-                id = Convert.ToInt32(originalRow.Cells["id"].Value),
                 motivo = tbMotivo.Text,
                 tratamiento = tbTratamiento.Text,
-                fecha = Convert.ToDateTime(tbDate.Text),
+                fecha = DateTime.Now,
                 sintomas = tbSintomas.Text,
                 examenFisico = tbExamen.Text,
-                observaciones = tbObservaciones.Text
+                observaciones = tbObservaciones.Text,
+                idPet = int.Parse(tbIdPet.Text)
             };
+
+            return objeto;
+
         }
 
         public void SetDataVaccine(DataGridViewRow row)
         {
+          
 
-            var columns = new List<(string DataPropertyName, string HeaderText)>
+            var requiredColumns = new List<string>
+    {
+        "Vacuna",
+        "Fecha",
+        "Mascota"
+       
+    };
+
+          
+            foreach (var columnName in requiredColumns)
             {
-                ("tipoVacuna", "Vacuna"),
-                ("fecha", "Fecha")
-            };
-            originalRow = row;
-
+                if (!row.DataGridView.Columns.Contains(columnName))
+                {
+                    MessageBox.Show($"La columna {columnName} no se encontró en el DataGridView.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            }
 
             tbTypeVaccine.Text = row.Cells["Vacuna"].Value.ToString();
-            tbDate.Text = Convert.ToDateTime(row.Cells["Fecha"].Value).ToString("yyyy-MM-dd");
+            dateTimePicker1.Text = Convert.ToDateTime(row.Cells["Fecha"].Value).ToString("yyyy-MM-dd");
+          
         }
 
         public Vaccine GetUpdatedDataVaccine()
         {
             return new Vaccine
             {
-                id = Convert.ToInt32(originalRow.Cells["id"].Value),
+                id = Convert.ToInt32(originalRow.Cells["id"].Value), 
                 tipoVacuna = tbTypeVaccine.Text,
-                fecha = Convert.ToDateTime(tbDate.Text),
-                nombreMascota = originalRow.Cells["Mascota"].Value.ToString()
-
-
+                fecha = Convert.ToDateTime(dateTimePicker1.Text),
+                nombreMascota = originalRow.Cells["Mascota"].Value.ToString() 
             };
         }
 
@@ -173,7 +194,7 @@ namespace VeterinariaProyecto.Forms_QueryAndVaccine
             {
                 if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
                 {
-                    // Se obtiene el valor seleccionado
+                    
                     object cellValue = dgvPets.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
 
                     // Se valida que no sea nulo y que sea entero, en el caso que sea entero se asigna el valor a una TextBox

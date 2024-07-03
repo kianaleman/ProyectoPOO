@@ -311,6 +311,11 @@ namespace VeterinariaProyecto
         {
 
         }
+
+        private void tbDate_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 
