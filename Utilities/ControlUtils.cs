@@ -8,20 +8,21 @@ namespace VeterinariaProyecto.Utilities
 {
     public static class ControlUtils
     {
-        public static void LimpiarTextBoxs(Control control)
+        public static void LimpiarTextBoxs(Control control, params TextBox[] exclusion)
         {
             foreach (Control c in control.Controls)
             {
-                if (c is TextBox)
+                if (c is TextBox textBox && !exclusion.Contains(textBox))
                 {
-                    ((TextBox)c).Clear();
+                    textBox.Clear();
                 }
                 else if (c.HasChildren)
                 {
-                    LimpiarTextBoxs(c); // Llamada recursiva para limpiar TextBox en controles anidados
+                    LimpiarTextBoxs(c, exclusion); // Llamada recursiva para limpiar TextBox en controles anidados
                 }
             }
         }
+
 
         public static bool TextBoxsNoVacios(Control control, params TextBox[] exclusion)
         {
@@ -46,6 +47,7 @@ namespace VeterinariaProyecto.Utilities
 
         public static void HabilitarDeshabilitarControles(Control control, bool habilitar, params Control[] exclusion)
         {
+            // True habilitar, False deshabilitar
             foreach (Control c in control.Controls)
             {
                 if (!exclusion.Contains(c))
@@ -61,9 +63,19 @@ namespace VeterinariaProyecto.Utilities
         }
 
         //Retorna true si no esta vacio, y false si esta vacio
-        public static bool IsTextBoxNotEmpty(TextBox textBox)
+        public static bool IsTextBoxNotEmpty(TextBox textBox, params TextBox[] exclusion)
         {
-            return !string.IsNullOrWhiteSpace(textBox.Text);
+            // Verificar si el textBox no está en la lista de exclusión y no está vacío
+            return !exclusion.Contains(textBox) && !string.IsNullOrWhiteSpace(textBox.Text);
+        }
+
+        public static void BloquearTextBoxs(params TextBox[] textBoxes)
+        {
+            foreach (TextBox textBox in textBoxes)
+            {
+                textBox.ReadOnly = true;
+                textBox.BackColor = SystemColors.Control; // Cambia el color de fondo si lo deseas
+            }
         }
     }
 }

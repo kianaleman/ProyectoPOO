@@ -32,7 +32,6 @@ namespace VeterinariaProyecto.Logic
             }
             catch (Exception ex)
             {
-                // Manejar la excepción (por ejemplo, loguearla)
                 Console.WriteLine($"Error al guardar: {ex.Message}");
                 resp = false;
             }
@@ -41,7 +40,7 @@ namespace VeterinariaProyecto.Logic
 
         public List<T> Listar(string selectQuery, Func<SQLiteDataReader, T> createEntity)
         {
-            SQLiteParameter[] parameters = new SQLiteParameter[0]; // Array vacío de parámetros
+            SQLiteParameter[] parameters = new SQLiteParameter[0];
             return Listar(selectQuery, parameters, createEntity);
         }
 
@@ -54,7 +53,7 @@ namespace VeterinariaProyecto.Logic
                 {
                     conexion.Open();
                     SQLiteCommand cmd = new SQLiteCommand(selectQuery, conexion);
-                    cmd.Parameters.AddRange(parameters); // Agregar parámetros
+                    cmd.Parameters.AddRange(parameters);
                     cmd.CommandType = System.Data.CommandType.Text;
 
                     using (SQLiteDataReader reader = cmd.ExecuteReader())
@@ -68,7 +67,6 @@ namespace VeterinariaProyecto.Logic
             }
             catch (Exception ex)
             {
-                // Manejar la excepción (por ejemplo, loguearla)
                 Console.WriteLine($"Error al listar: {ex.Message}");
             }
             return oLista;
@@ -94,7 +92,6 @@ namespace VeterinariaProyecto.Logic
             }
             catch (Exception ex)
             {
-                // Manejar la excepción (por ejemplo, loguearla)
                 Console.WriteLine($"Error al editar: {ex.Message}");
                 resp = false;
             }
@@ -121,7 +118,6 @@ namespace VeterinariaProyecto.Logic
             }
             catch (Exception ex)
             {
-                // Manejar la excepción (por ejemplo, loguearla)
                 Console.WriteLine($"Error al eliminar: {ex.Message}");
                 resp = false;
             }

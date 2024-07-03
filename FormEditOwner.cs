@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -23,15 +23,15 @@ namespace VeterinariaProyecto
             this.idOwner = idOwner;
 
             // Obtener y mostrar los datos actuales del propietario
-            currentOwner = OwnerLogic.Instancia.ObtenerOwnerPorId(idOwner); // Debes implementar ObtenerOwnerPorId según tu lógica
+            currentOwner = OwnerLogic.Instancia.ObtenerOwnerPorId(idOwner); 
 
             if (currentOwner != null)
             {
-                tbIdentificacion.Text = currentOwner.Identificacion;
-                tbName.Text = currentOwner.Nombres;
-                tbLastNames.Text = currentOwner.Apellidos;
-                tbNumber.Text = currentOwner.Telefono;
-                tbAddress.Text = currentOwner.Direccion;
+                tbIdentificacion.Text = currentOwner?.Identificacion;
+                tbName.Text = currentOwner?.Nombres;
+                tbLastNames.Text = currentOwner?.Apellidos;
+                tbNumber.Text = currentOwner?.Telefono;
+                tbAddress.Text = currentOwner?.Direccion;
             }
         }
 

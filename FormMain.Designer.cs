@@ -37,6 +37,7 @@
             btnViewPets = new Button();
             btnExit = new Button();
             btnAddQuery = new Button();
+            btnViewQueryVac = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -105,7 +106,7 @@
             btnViewPets.Name = "btnViewPets";
             btnViewPets.Size = new Size(137, 67);
             btnViewPets.TabIndex = 6;
-            btnViewPets.Text = "Ver Mascotas";
+            btnViewPets.Text = "Ver Mascotas/Dueño";
             btnViewPets.UseVisualStyleBackColor = false;
             btnViewPets.Click += btnAddPets_Click;
             // 
@@ -135,12 +136,26 @@
             btnAddQuery.UseVisualStyleBackColor = false;
             btnAddQuery.Click += btnAddQuery_Click;
             // 
+            // btnViewQueryVac
+            // 
+            btnViewQueryVac.BackColor = SystemColors.Info;
+            btnViewQueryVac.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
+            btnViewQueryVac.ForeColor = Color.Brown;
+            btnViewQueryVac.Location = new Point(216, 352);
+            btnViewQueryVac.Name = "btnViewQueryVac";
+            btnViewQueryVac.Size = new Size(144, 67);
+            btnViewQueryVac.TabIndex = 10;
+            btnViewQueryVac.Text = "Ver Consultas/Vacunas";
+            btnViewQueryVac.UseVisualStyleBackColor = false;
+            btnViewQueryVac.Click += btnViewQueryVac_Click;
+            // 
             // FormMain
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(128, 255, 128);
             ClientSize = new Size(800, 450);
+            Controls.Add(btnViewQueryVac);
             Controls.Add(btnAddQuery);
             Controls.Add(btnExit);
             Controls.Add(btnViewPets);
@@ -170,5 +185,6 @@
         private Button btnViewPets;
         private Button btnExit;
         private Button btnAddQuery;
+        private Button btnViewQueryVac;
     }
 }

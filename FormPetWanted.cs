@@ -6,9 +6,12 @@ using System.Data.Common;
 using System.Data.SQLite;
 using System.Drawing;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.Design.Behavior;
+using System.Xml.Linq;
 using VeterinariaProyecto.Logic;
 using VeterinariaProyecto.Modelo;
 using VeterinariaProyecto.Utilities;
@@ -18,10 +21,18 @@ namespace VeterinariaProyecto
     public partial class FormPetWanted : Form
     {
         private int ownerID;
+        private Owner currentOwnerID;
+        private String identificacionOwner;
         public FormPetWanted(int ownerID)
         {
             InitializeComponent();
             this.ownerID = ownerID;
+            currentOwnerID = OwnerLogic.Instancia.ObtenerOwnerPorId(ownerID);
+
+            if (currentOwnerID != null)
+            {
+                identificacionOwner = currentOwnerID.Identificacion;
+            }
         }
 
         private void FormPetWanted_Load(object sender, EventArgs e)
@@ -35,14 +46,10 @@ namespace VeterinariaProyecto
             dgvOwnerData.DataSource = null;
             dgvOwnerData.DataSource = OwnerLogic.Instancia.ListarOwners(ownerID);
 
-            dgvOwnerData.AutoGenerateColumns = false;
-            dgvOwnerData.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgvOwnerData.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells; // Ajusta automáticamente la altura de las filas
+            
             dgvOwnerData.DefaultCellStyle.WrapMode = DataGridViewTriState.True; // Permite el ajuste de texto
             dgvOwnerData.Columns.Clear();
-            dgvOwnerData.AllowUserToResizeRows = false; // Deshabilita el ajuste manual del tamaño de las filas
-            dgvOwnerData.AllowUserToResizeColumns = false; // Deshabilita el ajuste manual del tamaño de las columnas
-
+           
             var columns = new List<(string DataPropertyName, string HeaderText)>
             {
                 ("id", "ID"),
@@ -71,14 +78,10 @@ namespace VeterinariaProyecto
             dgvPetsData.DataSource = null;
             dgvPetsData.DataSource = PetLogic.Instancia.ListarPets(ownerID);
 
-            dgvPetsData.AutoGenerateColumns = false;
-            dgvPetsData.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgvPetsData.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells; // Ajusta automáticamente la altura de las filas
-            dgvPetsData.DefaultCellStyle.WrapMode = DataGridViewTriState.True; // Permite el ajuste de texto
+            
+            dgvPetsData.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
             dgvPetsData.Columns.Clear();
-            dgvPetsData.AllowUserToResizeRows = false; // Deshabilita el ajuste manual del tamaño de las filas
-            dgvPetsData.AllowUserToResizeColumns = false; // Deshabilita el ajuste manual del tamaño de las columnas
-
+            
             var columns = new List<(string DataPropertyName, string HeaderText)>
             {
                 ("id", "ID"),
@@ -121,11 +124,59 @@ namespace VeterinariaProyecto
             FormEditOwner formEditOwner = new FormEditOwner(ownerID);
             formEditOwner.ShowDialog();
             mostrar_Owner();
-            mostrar_Pets();
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnEditPet_Click(object sender, EventArgs e)
+        {
+            // Validar que el campo no esté vacío
+            if (string.IsNullOrWhiteSpace(tbIdPet.Text))
+            {
+                MessageBox.Show("Por favor, ingrese un ID de mascota.");
+                return;
+            }
+
+            // Validar que el número ingresado sea un entero y que no contenga letras
+            if (!int.TryParse(tbIdPet.Text, out int idPet))
+            {
+                MessageBox.Show("Por favor, ingrese un ID de mascota válido (solo números enteros).");
+                return;
+            }
+
+            // Obtener la lista de mascotas que pertenece al idOwner ingresado
+            List<Pet> pets = PetLogic.Instancia.ListarPets(ownerID);
+
+            // Buscar la mascota con el idPet ingresado
+            Pet? selectedPet = pets.FirstOrDefault(p => p.id == idPet);
+
+            if (selectedPet != null)
+            {
+                int idOwnerFromPet = selectedPet.idOwner;
+
+                // Comparar el idOwner obtenido con el idOwner recibido como parámetro
+                if (idOwnerFromPet == ownerID)
+                {
+                    // Si los idOwner coinciden, abrir el formulario de edición
+                    FormEditPet OpenFormEditPet = new FormEditPet(idPet, identificacionOwner);
+                    OpenFormEditPet.ShowDialog();
+                    mostrar_Pets();
+                }
+            }
+            else
+            {
+                // Manejar el caso donde la mascota no se encuentra
+                MessageBox.Show("Mascota no encontrada.");
+            }
         }
 
 
-        
+
+
+
         /*private void btnDeleteOwner_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show("¿Está seguro de que desea eliminar este dueño y todas sus mascotas?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);

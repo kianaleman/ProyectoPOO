@@ -25,6 +25,9 @@
     <Compile Update="FormsViewPets.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="FormViewQueryVaccine.cs">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Update="Properties\Resources.resx">

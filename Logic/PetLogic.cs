@@ -27,13 +27,14 @@ namespace VeterinariaProyecto.Logic
             }
         }
 
-        public bool savePet(Pet obj)
+        public bool SavePet(Pet obj)
         {
-            string query = "insert into Pet(nombre, especie, raza, edad, peso, genero, " +
+            string query = "INSERT INTO Pet(nombre, especie, raza, edad, peso, genero, " +
                            "fechaNacimiento, color, esterilizado, fechaRegistro, idOwner, notas) " +
-                           "values(@nombre, @especie, @raza, @edad, @peso, @genero, @fechaNacimiento, " +
+                           "VALUES(@nombre, @especie, @raza, @edad, @peso, @genero, @fechaNacimiento, " +
                            "@color, @esterilizado, @fechaRegistro, @idOwner, @notas)";
-            SQLiteParameter[] parameters = {
+            SQLiteParameter[] parameters = 
+            {
                 new SQLiteParameter("@nombre", obj.nombre),
                 new SQLiteParameter("@especie", obj.especie),
                 new SQLiteParameter("@raza", obj.raza),
@@ -47,53 +48,165 @@ namespace VeterinariaProyecto.Logic
                 new SQLiteParameter("@idOwner", obj.idOwner),
                 new SQLiteParameter("@notas", obj.notas)
             };
-            return Save(obj, query, parameters);
+
+            try
+            {
+                return Save(obj, query, parameters);
+            }
+            catch (Exception ex)
+            {
+                // Manejar la excepción (por ejemplo, loguearla)
+                Console.WriteLine($"Error al guardar la Mascota: {ex.Message}");
+                return false;
+            }
         }
+
 
         public List<Pet> ListarPets()
         {
             string query = "SELECT * FROM Pet";
-            return Listar(query, reader => new Pet()
+
+            try
             {
-                //id = Convert.ToInt32(reader["id"] ?? 0),
-                nombre = reader["nombre"]?.ToString() ?? string.Empty,
-                especie = reader["especie"]?.ToString() ?? string.Empty,
-                raza = reader["raza"]?.ToString() ?? string.Empty,
-                edad = Convert.ToInt32(reader["edad"] ?? 0),
-                peso = Convert.ToSingle(reader["peso"] ?? 0f),
-                genero = reader["genero"]?.ToString() ?? string.Empty,
-                fechaNacimiento = reader["fechaNacimiento"]?.ToString() ?? string.Empty,
-                color = reader["color"]?.ToString() ?? string.Empty,
-                esterilizado = reader["esterilizado"]?.ToString() ?? string.Empty,
-                fechaRegistro = reader.IsDBNull(reader.GetOrdinal("fechaRegistro")) ? DateTime.MinValue : reader.GetDateTime(reader.GetOrdinal("fechaRegistro")),
-                //idOwner = Convert.ToInt32(reader["idOwner"] ?? 0),
-                notas = reader["notas"]?.ToString() ?? string.Empty
-            });
+                return Listar(query, reader => new Pet()
+                {
+                    id = Convert.ToInt32(reader["id"] ?? 0),
+                    nombre = reader["nombre"]?.ToString() ?? string.Empty,
+                    especie = reader["especie"]?.ToString() ?? string.Empty,
+                    raza = reader["raza"]?.ToString() ?? string.Empty,
+                    edad = Convert.ToInt32(reader["edad"] ?? 0),
+                    peso = Convert.ToSingle(reader["peso"] ?? 0f),
+                    genero = reader["genero"]?.ToString() ?? string.Empty,
+                    fechaNacimiento = reader["fechaNacimiento"]?.ToString() ?? string.Empty,
+                    color = reader["color"]?.ToString() ?? string.Empty,
+                    esterilizado = reader["esterilizado"]?.ToString() ?? string.Empty,
+                    fechaRegistro = reader.IsDBNull(reader.GetOrdinal("fechaRegistro")) ? DateTime.MinValue : reader.GetDateTime(reader.GetOrdinal("fechaRegistro")),
+                    idOwner = Convert.ToInt32(reader["idOwner"] ?? 0),
+                    notas = reader["notas"]?.ToString() ?? string.Empty
+                });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al listar las Mascotas: {ex.Message}");
+                return new List<Pet>();
+            }
         }
+
+        public int SearchPet(string nombre)
+        {
+            int petId = -1;
+
+            try
+            {
+                using (SQLiteConnection conexion = new SQLiteConnection(cadena))
+                {
+                    conexion.Open();
+                    string query = "SELECT id FROM Pet WHERE nombre = @nombre LIMIT 1";
+                    using (SQLiteCommand cmd = new SQLiteCommand(query, conexion))
+                    {
+                        cmd.Parameters.Add(new SQLiteParameter("@nombre", nombre));
+                        cmd.CommandType = System.Data.CommandType.Text;
+                        object result = cmd.ExecuteScalar();
+                        if (result != null && result != DBNull.Value)
+                        {
+                            petId = Convert.ToInt32(result);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al buscar Pet: {ex.Message}");
+            }
+
+            return petId;
+        }
+
 
         public List<Pet> ListarPets(int idOwner)
         {
             string query = "SELECT * FROM Pet WHERE idOwner = @idOwner";
-            SQLiteParameter[] parameters = {
+            SQLiteParameter[] parameters = 
+            {
                 new SQLiteParameter("@idOwner", idOwner)
             };
 
-            return Listar(query, parameters, reader => new Pet()
+            try
             {
-                id = Convert.ToInt32(reader["id"] ?? 0),
-                nombre = reader["nombre"]?.ToString() ?? string.Empty,
-                especie = reader["especie"]?.ToString() ?? string.Empty,
-                raza = reader["raza"]?.ToString() ?? string.Empty,
-                edad = Convert.ToInt32(reader["edad"] ?? 0),
-                peso = Convert.ToSingle(reader["peso"] ?? 0f),
-                genero = reader["genero"]?.ToString() ?? string.Empty,
-                fechaNacimiento = reader["fechaNacimiento"]?.ToString() ?? string.Empty,
-                color = reader["color"]?.ToString() ?? string.Empty,
-                esterilizado = reader["esterilizado"]?.ToString() ?? string.Empty,
-                fechaRegistro = reader.IsDBNull(reader.GetOrdinal("fechaRegistro")) ? DateTime.MinValue : reader.GetDateTime(reader.GetOrdinal("fechaRegistro")),
-                idOwner = Convert.ToInt32(reader["idOwner"] ?? 0),
-                notas = reader["notas"]?.ToString() ?? string.Empty
-            });
+                return Listar(query, parameters, reader => new Pet()
+                {
+                    id = Convert.ToInt32(reader["id"] ?? 0),
+                    nombre = reader["nombre"]?.ToString() ?? string.Empty,
+                    especie = reader["especie"]?.ToString() ?? string.Empty,
+                    raza = reader["raza"]?.ToString() ?? string.Empty,
+                    edad = Convert.ToInt32(reader["edad"] ?? 0),
+                    peso = Convert.ToSingle(reader["peso"] ?? 0f),
+                    genero = reader["genero"]?.ToString() ?? string.Empty,
+                    fechaNacimiento = reader["fechaNacimiento"]?.ToString() ?? string.Empty,
+                    color = reader["color"]?.ToString() ?? string.Empty,
+                    esterilizado = reader["esterilizado"]?.ToString() ?? string.Empty,
+                    fechaRegistro = reader.IsDBNull(reader.GetOrdinal("fechaRegistro")) ? DateTime.MinValue : reader.GetDateTime(reader.GetOrdinal("fechaRegistro")),
+                    idOwner = Convert.ToInt32(reader["idOwner"] ?? 0),
+                    notas = reader["notas"]?.ToString() ?? string.Empty
+                });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al listar las Mascotas: {ex.Message}");
+                return new List<Pet>();
+            }
+        }
+
+
+        public Pet ObtenerPetPorId(int idPet)
+        {
+            Pet? pet = null;
+            string query = "SELECT id, nombre, especie, raza, edad, peso, genero, fechaNacimiento, color, esterilizado," +
+                "fechaRegistro, notas FROM Pet WHERE id = @id";
+
+            SQLiteParameter parameter = new SQLiteParameter("@id", idPet);
+
+            try
+            {
+                using (SQLiteConnection conexion = new SQLiteConnection(cadena))
+                {
+                    conexion.Open();
+                    using (SQLiteCommand cmd = new SQLiteCommand(query, conexion))
+                    {
+                        cmd.Parameters.Add(parameter);
+
+                        using (SQLiteDataReader reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                pet = new Pet
+                                {
+                                    id = Convert.ToInt32(reader["id"] ?? 0),
+                                    nombre = reader["nombre"]?.ToString() ?? string.Empty,
+                                    especie = reader["especie"]?.ToString() ?? string.Empty,
+                                    raza = reader["raza"]?.ToString() ?? string.Empty,
+                                    edad = Convert.ToInt32(reader["edad"] ?? 0),
+                                    peso = Convert.ToSingle(reader["peso"] ?? 0f),
+                                    genero = reader["genero"]?.ToString() ?? string.Empty,
+                                    fechaNacimiento = reader["fechaNacimiento"]?.ToString() ?? string.Empty,
+                                    color = reader["color"]?.ToString() ?? string.Empty,
+                                    esterilizado = reader["esterilizado"]?.ToString() ?? string.Empty,
+                                    fechaRegistro = reader.IsDBNull(reader.GetOrdinal("fechaRegistro")) ? DateTime.MinValue : reader.GetDateTime(reader.GetOrdinal("fechaRegistro")),
+                                    notas = reader["notas"]?.ToString() ?? string.Empty
+                                };
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al obtener la Mascota por ID: {ex.Message}");
+            }
+
+            // Devuelve pet, que puede ser null si no se encontró ninguna mascota con el id especificado
+            return pet;
+
         }
 
 
@@ -103,7 +216,9 @@ namespace VeterinariaProyecto.Logic
                            "edad = @edad, peso = @peso, genero = @genero, fechaNacimiento = @fechaNacimiento, " +
                            "color = @color, esterilizado = @esterilizado, fechaRegistro = @fechaRegistro, " +
                            "notas = @notas WHERE id = @id";
-            SQLiteParameter[] parameters = {
+
+            SQLiteParameter[] parameters = 
+            {
                 new SQLiteParameter("@id", obj.id),
                 new SQLiteParameter("@nombre", obj.nombre),
                 new SQLiteParameter("@especie", obj.especie),
@@ -117,13 +232,33 @@ namespace VeterinariaProyecto.Logic
                 new SQLiteParameter("@fechaRegistro", obj.fechaRegistro),
                 new SQLiteParameter("@notas", obj.notas)
             };
-            return Edit(obj, query, parameters);
+
+            try
+            {
+                return Edit(obj, query, parameters);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al editar la Mascota: {ex.Message}");
+                return false;
+            }
         }
+
 
         public bool DeletePet(Pet obj)
         {
             string query = "DELETE FROM Pet WHERE id = @id";
-            return Delete(obj.id, query);
+
+            try
+            {
+                return Delete(obj.id, query);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al eliminar la Mascota: {ex.Message}");
+                return false;
+            }
         }
+
     }
 }

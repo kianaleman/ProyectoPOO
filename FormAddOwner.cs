@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using VeterinariaProyecto.Modelo;
 using VeterinariaProyecto.Logic;
 using VeterinariaProyecto.Utilities;
+using System.Text.RegularExpressions;
 
 namespace VeterinariaProyecto
 {
@@ -88,7 +89,7 @@ namespace VeterinariaProyecto
             {
                 { tbNames, (@"^[a-zA-Z\s]+$", "El campo 'Nombres' solo puede contener letras.") },
                 { tbLastNames, (@"^[a-zA-Z\s]+$", "El campo 'Apellidos' solo puede contener letras.") },
-                { tbNumber, (@"^[0-9]+$", "El campo 'Telefono' solo puede contener números.") }
+                { tbNumber, (@"^[278]\d{7}$", "Introduce un numero de telefono valido.") }
             };
 
             foreach (var validacion in validaciones)
@@ -99,6 +100,71 @@ namespace VeterinariaProyecto
                     validacion.Key.Clear();
                     return false;
                 }
+            }
+
+            if (!IsValidNicaraguanCedula(tbIdentificacion.Text))
+            {
+                MessageBox.Show("Introduce una cédula de identidad válida.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                tbIdentificacion.Clear();
+                return false;
+            }
+
+            return true;
+        }
+
+        public bool IsValidNicaraguanCedula(string cedula)
+        {
+            // Patrón para verificar el formato básico
+            string pattern = @"^\d{3}-\d{6}-\d{4}[A-Za-z]$";
+            Regex regex = new Regex(pattern);
+            if (!regex.IsMatch(cedula))
+            {
+                return false;
+            }
+
+            // Validar la fecha de nacimiento
+            string datePart = cedula.Substring(4, 6);
+            if (!IsValidDate(datePart))
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+
+        public bool IsValidDate(string datePart)
+        {
+            // Validar que la fecha esté en el formato DDMMAA
+            if (datePart.Length != 6)
+            {
+                return false;
+            }
+
+            int day = int.Parse(datePart.Substring(0, 2));
+            int month = int.Parse(datePart.Substring(2, 2));
+            int year = int.Parse(datePart.Substring(4, 2)) + 1900;
+
+            // Ajuste para fechas después del 2000
+            if (year < 1920)
+            {
+                year += 100;
+            }
+
+            // Verificar que el año esté en el rango de 1920 a 2008
+            if (year < 1920 || year > 2008)
+            {
+                return false;
+            }
+
+            // Verificar que la fecha sea válida
+            try
+            {
+                DateTime date = new DateTime(year, month, day);
+            }
+            catch
+            {
+                return false;
             }
 
             return true;

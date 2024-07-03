@@ -13,50 +13,30 @@ using VeterinariaProyecto.Utilities;
 
 namespace VeterinariaProyecto
 {
-    public partial class FormRegisterPet : Form
+    public partial class FormEditPet : Form
     {
-        private ErrorProvider errorProvider;
-        private System.Windows.Forms.Timer searchTimer;
-        public FormRegisterPet()
+        private Pet currentPet;
+        public FormEditPet(int idPet, String identificacionOwner)
         {
             InitializeComponent();
-            errorProvider = new ErrorProvider();
-            // Inicializar Timer
-            searchTimer = new System.Windows.Forms.Timer();
-            searchTimer.Interval = 500; // Intervalo de 500 ms (medio segundo)
-            searchTimer.Tick += new EventHandler(SearchTimer_Tick);
-        }
 
-        private void SearchTimer_Tick(object sender, EventArgs e)
-        {
-            //detener el temporizador
-            searchTimer.Stop();
-
-            // Verificar si el TextBox no está vacío
-            if (ControlUtils.IsTextBoxNotEmpty(tbIdentificacionOwner))
+            currentPet = PetLogic.Instancia.ObtenerPetPorId(idPet);
+            if (currentPet != null)
             {
-                // Realizar la búsqueda en la base de datos
-                int respuesta = OwnerLogic.Instancia.SearchOwner(tbIdentificacionOwner.Text);
+                tbIdentificacionOwner.Text = identificacionOwner;
+                tbNamePet.Text = currentPet?.nombre;
+                tbSpecies.Text = currentPet?.especie;
+                tbRace.Text = currentPet?.raza;
+                tbAge.Text = currentPet?.edad.ToString();
+                tbWeight.Text = currentPet?.peso.ToString();
+                tbGender.Text = currentPet?.genero;
+                tbDateBirth.Text = currentPet?.fechaNacimiento;
+                tbColor.Text = currentPet?.color;
+                tbSterilized.Text = currentPet?.esterilizado;
+                tbRegistrationDate.Text = currentPet?.fechaRegistro.ToString();
+                tbNotes.Text = currentPet?.notas;
+            }
 
-                if (respuesta != -1)
-                {
-                    errorProvider.SetError(tbIdentificacionOwner, "El dueño con la identificación proporcionada ya existe.");
-                    errorProvider.Icon = Properties.Resources.checkIcon;
-                    ControlUtils.HabilitarDeshabilitarControles(this, true, tbRegistrationDate);
-                }
-                else
-                {
-                    errorProvider.SetError(tbIdentificacionOwner, "El dueño con la identificación proporcionada no existe.");
-                    errorProvider.Icon = SystemIcons.Error; // Icono de error por defecto
-                    ControlUtils.HabilitarDeshabilitarControles(this, false, tbIdentificacionOwner, btnCancel);
-                }
-            }
-            else
-            {
-                errorProvider.SetError(tbIdentificacionOwner, "Por favor, ingrese una identificación.");
-                errorProvider.Icon = SystemIcons.Error;
-                ControlUtils.HabilitarDeshabilitarControles(this, false, tbIdentificacionOwner, btnCancel);
-            }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -74,17 +54,9 @@ namespace VeterinariaProyecto
 
             if (validacionesTB())
             {
-                string identificacion = tbIdentificacionOwner.Text;
-                int id_Owner = OwnerLogic.Instancia.SearchOwner(identificacion);
-
-                if (id_Owner == -1)
-                {
-                    MessageBox.Show("No se encontró ningún propietario con la identificación proporcionada.", "Propietario no encontrado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
                 Pet objeto = new Pet()
                 {
+                    id = currentPet.id,
                     nombre = tbNamePet.Text,
                     especie = tbSpecies.Text,
                     raza = tbRace.Text,
@@ -94,27 +66,26 @@ namespace VeterinariaProyecto
                     fechaNacimiento = tbDateBirth.Text,
                     color = tbColor.Text,
                     esterilizado = tbSterilized.Text,
-                    fechaRegistro = DateTime.Now,
-                    idOwner = id_Owner,
+                    fechaRegistro = currentPet.fechaRegistro,
                     notas = tbNotes.Text
                 };
 
-                bool respuesta = PetLogic.Instancia.SavePet(objeto);
+                bool respuesta = PetLogic.Instancia.EditPet(objeto);
                 if (respuesta)
                 {
-                    MessageBox.Show("Mascota guardada correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Mascota Editada correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     ControlUtils.LimpiarTextBoxs(this);
                 }
                 else
                 {
-                    MessageBox.Show("Error al guardar la mascota.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Error al Editar la mascota.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             else
             {
                 return;
             }
-
+            this.Close();
         }
 
         public bool validacionesTB()
@@ -126,12 +97,11 @@ namespace VeterinariaProyecto
                 { tbNamePet, (@"^[a-zA-Z\s]+$", "El campo 'Nombre' solo puede contener letras.") },
                 { tbSpecies, (@"^[a-zA-Z\s]+$", "El campo 'Especie' solo puede contener letras.") },
                 { tbRace, (@"^[a-zA-Z\s]+$", "El campo 'Raza' solo puede contener letras.") },
-                { tbAge, (@"^[0-9]+$", "El campo 'Edad' solo puede contener números.") },
                 { tbWeight, ( @"^[0-9]*\.?[0-9]+$", "El campo 'Peso' solo puede contener numeros.") },
                 { tbGender, (@"^[a-zA-Z\s]+$", "El campo 'Genero' solo puede contener letras.") },
                 { tbColor, (@"^[a-zA-Z\s]+$", "El campo 'Color' solo puede contener letras.") },
                 { tbSterilized, (@"^[a-zA-Z\s]+$", "El campo 'Esterilizado' solo puede contener letras.") },
-                { tbNotes, (@"^[a-zA-Z\s]+$", "El campo 'Notas' solo puede contener letras.") }
+                { tbNotes, (@"^[a-zA-Z0-9\s-]+$", "El campo 'Notas' solo puede contener letras y numeros") }
             };
 
             foreach (var validacion in validaciones)
@@ -185,21 +155,11 @@ namespace VeterinariaProyecto
             return true;
         }
 
-        private void tbRegistrationDate_TextChanged(object sender, EventArgs e)
-        {
-            tbRegistrationDate.Text = DateTime.Now.ToString("dd/MM/yyyy");
-        }
-
         private void FormRegisterPet_Load(object sender, EventArgs e)
         {
             tbRegistrationDate.Enabled = false;
-            tbRegistrationDate.Text = DateTime.Now.ToString("dd/MM/yyyy");
+            tbIdentificacionOwner.Enabled = false;
         }
 
-        private void tbIdentificacionOwner_TextChanged(object sender, EventArgs e)
-        {
-            searchTimer.Stop();
-            searchTimer.Start();
-        }
     }
 }

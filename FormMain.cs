@@ -50,5 +50,11 @@ namespace VeterinariaProyecto
             FormAddQuery OpenFormAddQuery = new FormAddQuery();
             OpenFormAddQuery.ShowDialog();
         }
+
+        private void btnViewQueryVac_Click(object sender, EventArgs e)
+        {
+            FormViewQueryVaccine OpenFormViewQueryVaccine = new FormViewQueryVaccine();
+            OpenFormViewQueryVaccine.ShowDialog();
+        }
     }
 }

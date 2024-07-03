@@ -33,6 +33,10 @@
             label1 = new Label();
             label2 = new Label();
             btnEditOwner = new Button();
+            btnEditPet = new Button();
+            btnExit = new Button();
+            tbIdPet = new TextBox();
+            label3 = new Label();
             ((System.ComponentModel.ISupportInitialize)dgvOwnerData).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvPetsData).BeginInit();
             SuspendLayout();
@@ -41,24 +45,36 @@
             // 
             dgvOwnerData.AllowUserToAddRows = false;
             dgvOwnerData.AllowUserToDeleteRows = false;
+            dgvOwnerData.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvOwnerData.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            dgvOwnerData.BackgroundColor = Color.FromArgb(128, 255, 128);
+            dgvOwnerData.BorderStyle = BorderStyle.None;
             dgvOwnerData.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvOwnerData.GridColor = SystemColors.ActiveCaptionText;
             dgvOwnerData.Location = new Point(12, 52);
             dgvOwnerData.Name = "dgvOwnerData";
             dgvOwnerData.ReadOnly = true;
             dgvOwnerData.RowHeadersWidth = 51;
-            dgvOwnerData.Size = new Size(1180, 106);
+            dgvOwnerData.Size = new Size(1180, 123);
             dgvOwnerData.TabIndex = 0;
             // 
             // dgvPetsData
             // 
             dgvPetsData.AllowUserToAddRows = false;
             dgvPetsData.AllowUserToDeleteRows = false;
+            dgvPetsData.AllowUserToResizeColumns = false;
+            dgvPetsData.AllowUserToResizeRows = false;
+            dgvPetsData.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvPetsData.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            dgvPetsData.BackgroundColor = Color.FromArgb(128, 255, 128);
+            dgvPetsData.BorderStyle = BorderStyle.None;
             dgvPetsData.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvPetsData.GridColor = SystemColors.InactiveCaptionText;
             dgvPetsData.Location = new Point(12, 313);
             dgvPetsData.Name = "dgvPetsData";
             dgvPetsData.ReadOnly = true;
             dgvPetsData.RowHeadersWidth = 51;
-            dgvPetsData.Size = new Size(1180, 188);
+            dgvPetsData.Size = new Size(1180, 225);
             dgvPetsData.TabIndex = 1;
             // 
             // label1
@@ -91,12 +107,53 @@
             btnEditOwner.UseVisualStyleBackColor = true;
             btnEditOwner.Click += btnEditOwner_Click;
             // 
+            // btnEditPet
+            // 
+            btnEditPet.Location = new Point(531, 547);
+            btnEditPet.Name = "btnEditPet";
+            btnEditPet.Size = new Size(162, 70);
+            btnEditPet.TabIndex = 5;
+            btnEditPet.Text = "EDITAR MASCOTA";
+            btnEditPet.UseVisualStyleBackColor = true;
+            btnEditPet.Click += btnEditPet_Click;
+            // 
+            // btnExit
+            // 
+            btnExit.Location = new Point(1052, 559);
+            btnExit.Name = "btnExit";
+            btnExit.Size = new Size(140, 58);
+            btnExit.TabIndex = 6;
+            btnExit.Text = "VOLVER";
+            btnExit.UseVisualStyleBackColor = true;
+            btnExit.Click += btnExit_Click;
+            // 
+            // tbIdPet
+            // 
+            tbIdPet.Location = new Point(318, 590);
+            tbIdPet.Name = "tbIdPet";
+            tbIdPet.Size = new Size(207, 27);
+            tbIdPet.TabIndex = 7;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI", 9F, FontStyle.Italic, GraphicsUnit.Point, 0);
+            label3.Location = new Point(320, 567);
+            label3.Name = "label3";
+            label3.Size = new Size(205, 20);
+            label3.TabIndex = 8;
+            label3.Text = "Ingresa ID de mascota a Editar";
+            // 
             // FormPetWanted
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(128, 255, 128);
             ClientSize = new Size(1204, 629);
+            Controls.Add(label3);
+            Controls.Add(tbIdPet);
+            Controls.Add(btnExit);
+            Controls.Add(btnEditPet);
             Controls.Add(btnEditOwner);
             Controls.Add(label2);
             Controls.Add(label1);
@@ -119,5 +176,9 @@
         private Label label1;
         private Label label2;
         private Button btnEditOwner;
+        private Button btnEditPet;
+        private Button btnExit;
+        private TextBox tbIdPet;
+        private Label label3;
     }
 }

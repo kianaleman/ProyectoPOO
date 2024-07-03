@@ -24,13 +24,10 @@ namespace VeterinariaProyecto
             dgvPets.DataSource = null;
             dgvPets.DataSource = PetLogic.Instancia.ListarPets();
 
-            dgvPets.AutoGenerateColumns = false;
-            dgvPets.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgvPets.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells; // Ajusta automáticamente la altura de las filas
+            
             dgvPets.DefaultCellStyle.WrapMode = DataGridViewTriState.True; // Permite el ajuste de texto
             dgvPets.Columns.Clear();
-            dgvPets.AllowUserToResizeRows = false; // Deshabilita el ajuste manual del tamaño de las filas
-            dgvPets.AllowUserToResizeColumns = false; // Deshabilita el ajuste manual del tamaño de las columnas
+            
 
             var columns = new List<(string DataPropertyName, string HeaderText)>
             {
@@ -99,6 +96,8 @@ namespace VeterinariaProyecto
         {
             this.Close();
         }
+
+        
     }
 
 

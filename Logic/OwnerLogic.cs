@@ -31,38 +31,60 @@ namespace VeterinariaProyecto.Logic
 
         public bool SaveOwner(Owner obj)
         {
-            string query = "insert into OwnerPet(Nombres, Apellidos, Telefono, Direccion, Identificacion) " +
-                           "values (@nombres, @apellidos, @telefono, @direccion, @identificacion)";
-            SQLiteParameter[] parameters = {
+            string query = "INSERT INTO OwnerPet(Nombres, Apellidos, Telefono, Direccion, Identificacion) " +
+                           "VALUES (@nombres, @apellidos, @telefono, @direccion, @identificacion)";
+            SQLiteParameter[] parameters =
+            {
                 new SQLiteParameter("@nombres", obj.Nombres),
                 new SQLiteParameter("@apellidos", obj.Apellidos),
                 new SQLiteParameter("@telefono", obj.Telefono),
                 new SQLiteParameter("@direccion", obj.Direccion),
                 new SQLiteParameter("@identificacion", obj.Identificacion)
             };
-            return Save(obj, query, parameters);
+
+            try
+            {
+                return Save(obj, query, parameters);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al guardar el propietario {obj.Nombres} {obj.Apellidos}: {ex.Message}");
+                return false;
+            }
         }
+
 
         public List<Owner> ListarOwners()
         {
             string query = "SELECT * FROM OwnerPet";
-            return Listar(query, reader => new Owner()
+
+            try
             {
-                id = Convert.ToInt32(reader["id"] ?? 0),
-                Nombres = reader["Nombres"]?.ToString() ?? string.Empty,
-                Apellidos = reader["Apellidos"]?.ToString() ?? string.Empty,
-                Telefono = reader["Telefono"]?.ToString() ?? string.Empty,
-                Direccion = reader["Direccion"]?.ToString() ?? string.Empty,
-                Identificacion = reader["Identificacion"]?.ToString() ?? string.Empty
-            });
+                return Listar(query, reader => new Owner()
+                {
+                    id = Convert.ToInt32(reader["id"] ?? 0),
+                    Nombres = reader["Nombres"]?.ToString() ?? string.Empty,
+                    Apellidos = reader["Apellidos"]?.ToString() ?? string.Empty,
+                    Telefono = reader["Telefono"]?.ToString() ?? string.Empty,
+                    Direccion = reader["Direccion"]?.ToString() ?? string.Empty,
+                    Identificacion = reader["Identificacion"]?.ToString() ?? string.Empty
+                });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al listar propietarios: {ex.Message}");
+                return new List<Owner>();
+            }
         }
+
 
         public bool EditOwner(Owner obj)
         {
             string query = "UPDATE OwnerPet SET Nombres = @nombres, Apellidos = @apellidos, " +
                            "Telefono = @telefono, Direccion = @direccion, Identificacion = @identificacion " +
                            "WHERE id = @id";
-            SQLiteParameter[] parameters = {
+            SQLiteParameter[] parameters = 
+            {
                 new SQLiteParameter("@id", obj.id),
                 new SQLiteParameter("@nombres", obj.Nombres),
                 new SQLiteParameter("@apellidos", obj.Apellidos),
@@ -70,14 +92,34 @@ namespace VeterinariaProyecto.Logic
                 new SQLiteParameter("@direccion", obj.Direccion),
                 new SQLiteParameter("@identificacion", obj.Identificacion)
             };
-            return Edit(obj, query, parameters);
+
+            try
+            {
+                return Edit(obj, query, parameters);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al editar el propietario con id {obj.id}: {ex.Message}");
+                return false;
+            }
         }
+
 
         public bool DeleteOwner(Owner obj)
         {
             string query = "DELETE FROM OwnerPet WHERE id = @id";
-            return Delete(obj.id, query);
+
+            try
+            {
+                return Delete(obj.id, query);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al eliminar el propietario con id {obj.id}: {ex.Message}");
+                return false;
+            }
         }
+
 
         public int SearchOwner(string identificacion)
         {
@@ -103,7 +145,6 @@ namespace VeterinariaProyecto.Logic
             }
             catch (Exception ex)
             {
-                // Manejar la excepción (por ejemplo, loguearla)
                 Console.WriteLine($"Error al buscar owner: {ex.Message}");
             }
 
@@ -113,20 +154,30 @@ namespace VeterinariaProyecto.Logic
         public List<Owner> ListarOwners(int ownerId)
         {
             string query = "SELECT * FROM OwnerPet WHERE id = @ownerId";
-            SQLiteParameter[] parameters = {
-            new SQLiteParameter("@ownerId", ownerId)
-        };
-
-            return Listar(query, parameters, reader => new Owner()
+            SQLiteParameter[] parameters = 
             {
-                id = Convert.ToInt32(reader["id"] ?? 0),
-                Nombres = reader["Nombres"]?.ToString() ?? string.Empty,
-                Apellidos = reader["Apellidos"]?.ToString() ?? string.Empty,
-                Telefono = reader["Telefono"]?.ToString() ?? string.Empty,
-                Direccion = reader["Direccion"]?.ToString() ?? string.Empty,
-                Identificacion = reader["Identificacion"]?.ToString() ?? string.Empty
-            });
+                new SQLiteParameter("@ownerId", ownerId)
+            };
+
+            try
+            {
+                return Listar(query, parameters, reader => new Owner()
+                {
+                    id = Convert.ToInt32(reader["id"] ?? 0),
+                    Nombres = reader["Nombres"]?.ToString() ?? string.Empty,
+                    Apellidos = reader["Apellidos"]?.ToString() ?? string.Empty,
+                    Telefono = reader["Telefono"]?.ToString() ?? string.Empty,
+                    Direccion = reader["Direccion"]?.ToString() ?? string.Empty,
+                    Identificacion = reader["Identificacion"]?.ToString() ?? string.Empty
+                });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al listar propietarios con id {ownerId}: {ex.Message}");
+                return new List<Owner>();
+            }
         }
+
 
         public Owner ObtenerOwnerPorId(int idOwner)
         {
@@ -166,7 +217,6 @@ namespace VeterinariaProyecto.Logic
             }
             catch (Exception ex)
             {
-                // Manejar la excepción (por ejemplo, loguearla)
                 Console.WriteLine($"Error al obtener el propietario por ID: {ex.Message}");
             }
 

@@ -45,10 +45,18 @@
             // 
             dgvPets.AllowUserToAddRows = false;
             dgvPets.AllowUserToDeleteRows = false;
+            dgvPets.AllowUserToResizeColumns = false;
+            dgvPets.AllowUserToResizeRows = false;
+            dgvPets.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvPets.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            dgvPets.BackgroundColor = Color.FromArgb(128, 255, 128);
+            dgvPets.BorderStyle = BorderStyle.None;
             dgvPets.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvPets.GridColor = SystemColors.InactiveCaptionText;
             dgvPets.Location = new Point(12, 189);
             dgvPets.Name = "dgvPets";
             dgvPets.ReadOnly = true;
+            dgvPets.RowHeadersVisible = false;
             dgvPets.RowHeadersWidth = 51;
             dgvPets.Size = new Size(1232, 483);
             dgvPets.TabIndex = 0;
