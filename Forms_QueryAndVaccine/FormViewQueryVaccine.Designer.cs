@@ -38,6 +38,7 @@
             errorProvider1 = new ErrorProvider(components);
             btnSearchQuery = new Button();
             btnVerTodo = new Button();
+            button1 = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvQuery).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvVaccine).BeginInit();
             ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
@@ -80,7 +81,6 @@
             dgvQuery.Size = new Size(678, 367);
             dgvQuery.TabIndex = 4;
             dgvQuery.CellContentClick += dgvQuery_CellContentClick;
-            dgvQuery.CellDoubleClick += dgvQuery_CellDoubleClick;
             // 
             // dgvVaccine
             // 
@@ -99,7 +99,7 @@
             dgvVaccine.Size = new Size(249, 367);
             dgvVaccine.TabIndex = 5;
             dgvVaccine.CellContentClick += dgvVaccine_CellContentClick;
-            dgvVaccine.CellDoubleClick += dgvVaccine_CellDoubleClick;
+          
             // 
             // tbIdOwner
             // 
@@ -144,12 +144,23 @@
             btnVerTodo.UseVisualStyleBackColor = true;
             btnVerTodo.Click += btnVerTodo_Click;
             // 
+            // button1
+            // 
+            button1.Location = new Point(646, 76);
+            button1.Name = "button1";
+            button1.Size = new Size(94, 29);
+            button1.TabIndex = 10;
+            button1.Text = "Editar";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
             // FormViewQueryVaccine
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(128, 255, 128);
             ClientSize = new Size(1151, 556);
+            Controls.Add(button1);
             Controls.Add(btnVerTodo);
             Controls.Add(btnSearchQuery);
             Controls.Add(cmbPets);
@@ -181,5 +192,6 @@
         private ErrorProvider errorProvider1;
         private Button btnSearchQuery;
         private Button btnVerTodo;
+        private Button button1;
     }
 }

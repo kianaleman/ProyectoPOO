@@ -1,59 +1,184 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using VeterinariaProyecto.Logic;
 using VeterinariaProyecto.Modelo;
-
+using VeterinariaProyecto.Utilities;
 
 namespace VeterinariaProyecto.Forms_QueryAndVaccine
 {
     public partial class FormEditQueryAndVaccine : Form
     {
+        private Owner currentOwner;
+        private ErrorProvider errorProvider;
+        private System.Windows.Forms.Timer searchTimer;
 
-        private DataGridViewRow originalRow;
         public FormEditQueryAndVaccine()
         {
             InitializeComponent();
+            errorProvider = new ErrorProvider();
+
+            // Inicializar Timer
+            searchTimer = new System.Windows.Forms.Timer
+            {
+                Interval = 500 // Intervalo de 500 ms (medio segundo)
+            };
+            searchTimer.Tick += new EventHandler(SearchTimer_Tick);
         }
 
-
-        public void SetData(DataGridViewRow row)
+        private void FormEditQueryAndVaccine_Load(object sender, EventArgs e)
         {
+            ControlUtils.BloquearTextBoxs(tbIdPet, tbIdOwner, tbNameOwner, tbLastNameOwner, tbNumberOwner);
+            tbDate.Text = DateTime.Now.ToString("dd/MM/yyyy");
+        }
 
-            var requiredColumns = new List<string>
-    {
-        "Motivo",
-        "Tratamiento",
-        "Sintomas",
-        "Examen",
-        "Observaciones",
-        "Fecha"
-    };
+        private void SearchTimer_Tick(object sender, EventArgs e)
+        {
+            searchTimer.Stop();
 
-            foreach (var columnName in requiredColumns)
+            if (tbIdOwner.Text.Length == 16)
             {
-                if (!row.DataGridView.Columns.Contains(columnName))
+                int respuesta = OwnerLogic.Instancia.SearchOwner(tbIdOwner.Text);
+
+                if (respuesta != -1)
                 {
-                    MessageBox.Show($"La columna {columnName} no se encontró en el DataGridView.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
+                    errorProvider.SetError(tbIdOwner, "");
+                    ControlUtils.HabilitarDeshabilitarControles(this, true, tbIdPet, tbDate, tbIdOwner, tbNameOwner, tbLastNameOwner, tbNumberOwner);
+                    cargarOwner(respuesta);
+                    tbTypeVaccine.Enabled = !rBtnNo.Checked;
+                    mostrar_Pets(respuesta);
+                }
+                else
+                {
+                    MostrarError("Identificacion no Encontrada");
                 }
             }
-
-            tbMotivo.Text = row.Cells["Motivo"].Value.ToString();
-            tbTratamiento.Text = row.Cells["Tratamiento"].Value.ToString();
-            tbSintomas.Text = row.Cells["Sintomas"].Value.ToString();
-            tbExamen.Text = row.Cells["Examen"].Value.ToString();
-            tbObservaciones.Text = row.Cells["Observaciones"].Value.ToString();
-            dateTimePicker1.Text = Convert.ToDateTime(row.Cells["Fecha"].Value).ToString("yyyy-MM-dd");
-
+            else
+            {
+                MostrarError("Ingrese una identificacion Valida");
+            }
         }
 
-        public Query GetUpdatedData()
+        private void MostrarError(string mensaje)
+        {
+            errorProvider.SetError(tbIdOwner, mensaje);
+            errorProvider.Icon = SystemIcons.Error;
+            ControlUtils.HabilitarDeshabilitarControles(this, false, tbIdOwner, btnExit);
+            ControlUtils.LimpiarTextBoxs(this, tbIdOwner, tbDate, tbExamen, tbMotivo, tbObservaciones, tbSintomas, tbTratamiento, tbTypeVaccine);
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnSearchPets_Click(object sender, EventArgs e)
+        {
+            int idOwner = int.Parse(tbIdOwner.Text);
+            mostrar_Pets(idOwner);
+        }
+
+        public void mostrar_Pets(int idOwner)
+        {
+            dgvPets.DataSource = null;
+            dgvPets.DataSource = PetLogic.Instancia.ListarPets(idOwner);
+
+            dgvPets.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+            dgvPets.Columns.Clear();
+
+            var columns = new List<(string DataPropertyName, string HeaderText)>
+            {
+                ("id", "ID"),
+                ("nombre", "Nombre")
+            };
+
+            foreach (var (DataPropertyName, HeaderText) in columns)
+            {
+                var column = new DataGridViewTextBoxColumn
+                {
+                    DataPropertyName = DataPropertyName,
+                    HeaderText = HeaderText,
+                };
+                dgvPets.Columns.Add(column);
+            }
+        }
+
+        private void dgvPets_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                object cellValue = dgvPets.Rows[e.RowIndex].Cells["id"].Value;
+
+                if (cellValue != null && int.TryParse(cellValue.ToString(), out int idPet))
+                {
+                    tbIdPet.Text = idPet.ToString();
+                    mostrar_Consultas(idPet);
+                }
+                else
+                {
+                    tbIdPet.Text = string.Empty;
+                }
+            }
+        }
+
+        public void cargarOwner(int idOwner)
+        {
+            currentOwner = OwnerLogic.Instancia.ObtenerOwnerPorId(idOwner);
+
+            if (currentOwner != null)
+            {
+                tbIdOwner.Text = currentOwner.Identificacion;
+                tbNameOwner.Text = currentOwner.Nombres;
+                tbLastNameOwner.Text = currentOwner.Apellidos;
+                tbNumberOwner.Text = currentOwner.Telefono;
+            }
+        }
+
+        private void btnSaveQuery_Click(object sender, EventArgs e)
+        {
+            if (rBtnNo.Checked)
+            {
+                if (!ControlUtils.TextBoxsNoVacios(this, tbTypeVaccine))
+                {
+                    return;
+                }
+                GuardarQuery();
+                ReiniciarFormulario();
+            }
+            else
+            {
+                if (!ControlUtils.TextBoxsNoVacios(this))
+                {
+                    return;
+                }
+                GuardarQuery();
+                GuardarVaccine();
+                ReiniciarFormulario();
+            }
+        }
+
+        private void ReiniciarFormulario()
+        {
+            dgvPets.DataSource = null;
+            dgvPets.Rows.Clear();
+            ControlUtils.LimpiarTextBoxs(this, tbDate);
+        }
+
+        public void GuardarVaccine()
+        {
+            Vaccine objeto = new Vaccine
+            {
+                fecha = DateTime.Now,
+                tipoVacuna = tbTypeVaccine.Text,
+                idPet = int.Parse(tbIdPet.Text)
+            };
+
+            bool respuesta = VaccineLogic.Instancia.SaveVaccine(objeto);
+            MostrarMensaje(respuesta, "Vacuna Guardada correctamente.", "Error al guardar la Vacuna.");
+        }
+
+        public void GuardarQuery()
         {
             Query objeto = new Query
             {
@@ -66,151 +191,49 @@ namespace VeterinariaProyecto.Forms_QueryAndVaccine
                 idPet = int.Parse(tbIdPet.Text)
             };
 
-            return objeto;
-
+            bool respuesta = QueryLogic.Instancia.saveQuery(objeto);
+            MostrarMensaje(respuesta, "Consulta Guardada correctamente.", "Error al guardar la Consulta.");
         }
 
-        public void SetDataVaccine(DataGridViewRow row)
+        private void MostrarMensaje(bool respuesta, string mensajeExito, string mensajeError)
         {
-          
-
-            var requiredColumns = new List<string>
-    {
-        "Vacuna",
-        "Fecha",
-        "Mascota"
-       
-    };
-
-          
-            foreach (var columnName in requiredColumns)
+            if (respuesta)
             {
-                if (!row.DataGridView.Columns.Contains(columnName))
-                {
-                    MessageBox.Show($"La columna {columnName} no se encontró en el DataGridView.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
+                MessageBox.Show(mensajeExito, "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-
-            tbTypeVaccine.Text = row.Cells["Vacuna"].Value.ToString();
-            dateTimePicker1.Text = Convert.ToDateTime(row.Cells["Fecha"].Value).ToString("yyyy-MM-dd");
-          
+            else
+            {
+                MessageBox.Show(mensajeError, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
-        public Vaccine GetUpdatedDataVaccine()
+        private void mostrar_Consultas(int idPet)
         {
-            return new Vaccine
+            dgvPets.DataSource = null;
+            dgvPets.DataSource = QueryLogic.Instancia.ObtenerConsultasPorIdPet(idPet);
+
+            dgvPets.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+            dgvPets.Columns.Clear();
+
+            var columns = new List<(string DataPropertyName, string HeaderText)>
             {
-                id = Convert.ToInt32(originalRow.Cells["id"].Value), 
-                tipoVacuna = tbTypeVaccine.Text,
-                fecha = Convert.ToDateTime(dateTimePicker1.Text),
-                nombreMascota = originalRow.Cells["Mascota"].Value.ToString() 
+                ("fecha", "Fecha y Hora"),
+                ("motivo", "Motivo"),
+                ("sintomas", "Síntomas"),
+                ("examenFisico", "Examen Físico"),
+                ("observaciones", "Observaciones"),
+                ("tratamiento", "Tratamiento")
             };
-        }
 
-        private void btnSaveChanges_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label14_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void FormEditQueryAndVaccine_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tbIdPet_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tbNameOwner_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tbLastNameOwner_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tbNumberOwner_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tbMotivo_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tbIdOwner_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tbMotivo_TextChanged_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tbExamen_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tbSintomas_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tbTratamiento_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tbTypeVaccine_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tbDate_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnSaveQuery_Click(object sender, EventArgs e)
-        {
-            DialogResult = DialogResult.OK;
-            Close();
-        }
-
-      
-            private void dgvPets_CellContentClick(object sender, DataGridViewCellEventArgs e)
+            foreach (var (DataPropertyName, HeaderText) in columns)
             {
-                if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+                var column = new DataGridViewTextBoxColumn
                 {
-                    
-                    object cellValue = dgvPets.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
-
-                    // Se valida que no sea nulo y que sea entero, en el caso que sea entero se asigna el valor a una TextBox
-                    if (cellValue != null && int.TryParse(cellValue.ToString(), out int intValue))
-                    {
-                        tbIdPet.Text = intValue.ToString();
-                    }
-                    // En el caso contrario no se asigna nada, o se limpia
-                    else
-                    {
-                        tbIdPet.Text = string.Empty;
-                    }
-                }
+                    DataPropertyName = DataPropertyName,
+                    HeaderText = HeaderText,
+                };
+                dgvPets.Columns.Add(column);
             }
-        
-
-
+        }
     }
 }

@@ -54,7 +54,43 @@ namespace VeterinariaProyecto.Logic
             }
         }
 
-        public List<Query> ListarQueryConNombreMascota()
+        public List<Query> ObtenerConsultasPorIdPet(int idPet)
+        {
+            List<Query> consultas = new List<Query>();
+
+            using (SQLiteConnection connection = new SQLiteConnection("Data Source=veterinaria.db;Version=3;"))
+            {
+                connection.Open();
+                string query = "SELECT * FROM Consultas WHERE idPet = @idPet";
+                using (SQLiteCommand command = new SQLiteCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@idPet", idPet);
+                    using (SQLiteDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Query consulta = new Query
+                            {
+                                id = reader.GetInt32(0),
+                                motivo = reader.GetString(1),
+                                tratamiento = reader.GetString(2),
+                                fecha = reader.GetDateTime(3),
+                                sintomas = reader.GetString(4),
+                                examenFisico = reader.GetString(5),
+                                observaciones = reader.GetString(6),
+                                idPet = reader.GetInt32(7)
+                            };
+                            consultas.Add(consulta);
+                        }
+                    }
+                }
+            }
+
+            return consultas;
+        }
+    
+
+    public List<Query> ListarQueryConNombreMascota()
         {
             string query = @"
                 SELECT Q.*, P.nombre AS nombreMascota

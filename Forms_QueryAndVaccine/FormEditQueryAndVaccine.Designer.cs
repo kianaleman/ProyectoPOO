@@ -49,7 +49,6 @@
             tbMotivo = new TextBox();
             tbSintomas = new TextBox();
             label6 = new Label();
-            label5 = new Label();
             label4 = new Label();
             tbIdPet = new TextBox();
             label3 = new Label();
@@ -58,7 +57,9 @@
             btnSearchPets = new Button();
             dgvPets = new DataGridView();
             tbIdOwner = new TextBox();
-            dateTimePicker1 = new DateTimePicker();
+            tbDate = new TextBox();
+            label5 = new Label();
+            textBox1 = new TextBox();
             gpVaccine.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvPets).BeginInit();
             SuspendLayout();
@@ -82,7 +83,6 @@
             tbTypeVaccine.Name = "tbTypeVaccine";
             tbTypeVaccine.Size = new Size(174, 107);
             tbTypeVaccine.TabIndex = 2;
-            tbTypeVaccine.TextChanged += tbTypeVaccine_TextChanged;
             // 
             // rBtnNo
             // 
@@ -180,7 +180,6 @@
             btnSaveQuery.TabIndex = 49;
             btnSaveQuery.Text = "Guardar";
             btnSaveQuery.UseVisualStyleBackColor = true;
-            btnSaveQuery.Click += btnSaveQuery_Click;
             // 
             // tbTratamiento
             // 
@@ -189,7 +188,6 @@
             tbTratamiento.Name = "tbTratamiento";
             tbTratamiento.Size = new Size(264, 69);
             tbTratamiento.TabIndex = 48;
-            tbTratamiento.TextChanged += tbTratamiento_TextChanged;
             // 
             // label8
             // 
@@ -208,7 +206,6 @@
             tbExamen.Name = "tbExamen";
             tbExamen.Size = new Size(264, 69);
             tbExamen.TabIndex = 46;
-            tbExamen.TextChanged += tbExamen_TextChanged;
             // 
             // label7
             // 
@@ -234,7 +231,6 @@
             tbMotivo.Name = "tbMotivo";
             tbMotivo.Size = new Size(264, 69);
             tbMotivo.TabIndex = 43;
-            tbMotivo.TextChanged += tbMotivo_TextChanged_1;
             // 
             // tbSintomas
             // 
@@ -243,7 +239,6 @@
             tbSintomas.Name = "tbSintomas";
             tbSintomas.Size = new Size(264, 69);
             tbSintomas.TabIndex = 42;
-            tbSintomas.TextChanged += tbSintomas_TextChanged;
             // 
             // label6
             // 
@@ -253,15 +248,6 @@
             label6.Size = new Size(70, 20);
             label6.TabIndex = 41;
             label6.Text = "Sintomas";
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Location = new Point(1019, 304);
-            label5.Name = "label5";
-            label5.Size = new Size(57, 20);
-            label5.TabIndex = 39;
-            label5.Text = "FECHA:";
             // 
             // label4
             // 
@@ -278,7 +264,6 @@
             tbIdPet.Name = "tbIdPet";
             tbIdPet.Size = new Size(100, 27);
             tbIdPet.TabIndex = 37;
-            tbIdPet.TextChanged += tbIdPet_TextChanged;
             // 
             // label3
             // 
@@ -302,7 +287,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Trebuchet MS", 22F, FontStyle.Bold | FontStyle.Italic);
-            label1.Location = new Point(473, 7);
+            label1.Location = new Point(886, 9);
             label1.Name = "label1";
             label1.Size = new Size(330, 46);
             label1.TabIndex = 32;
@@ -310,7 +295,7 @@
             // 
             // btnSearchPets
             // 
-            btnSearchPets.Location = new Point(276, 44);
+            btnSearchPets.Location = new Point(411, 42);
             btnSearchPets.Name = "btnSearchPets";
             btnSearchPets.Size = new Size(134, 29);
             btnSearchPets.TabIndex = 62;
@@ -334,7 +319,6 @@
             dgvPets.RowHeadersWidth = 51;
             dgvPets.Size = new Size(319, 115);
             dgvPets.TabIndex = 61;
-            dgvPets.CellContentClick += dgvPets_CellContentClick;
             // 
             // tbIdOwner
             // 
@@ -343,21 +327,40 @@
             tbIdOwner.PlaceholderText = "Ingrese Identificacion del Dueño";
             tbIdOwner.Size = new Size(231, 27);
             tbIdOwner.TabIndex = 60;
-            tbIdOwner.TextChanged += tbIdOwner_TextChanged;
             // 
-            // dateTimePicker1
+            // tbDate
             // 
-            dateTimePicker1.Location = new Point(990, 327);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(250, 27);
-            dateTimePicker1.TabIndex = 63;
+            tbDate.Location = new Point(1072, 304);
+            tbDate.Name = "tbDate";
+            tbDate.ReadOnly = true;
+            tbDate.Size = new Size(140, 27);
+            tbDate.TabIndex = 66;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(1009, 307);
+            label5.Name = "label5";
+            label5.Size = new Size(57, 20);
+            label5.TabIndex = 65;
+            label5.Text = "FECHA:";
+            // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(265, 44);
+            textBox1.Name = "textBox1";
+            textBox1.ReadOnly = true;
+            textBox1.Size = new Size(140, 27);
+            textBox1.TabIndex = 67;
             // 
             // FormEditQueryAndVaccine
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1245, 521);
-            Controls.Add(dateTimePicker1);
+            Controls.Add(textBox1);
+            Controls.Add(tbDate);
+            Controls.Add(label5);
             Controls.Add(btnSearchPets);
             Controls.Add(dgvPets);
             Controls.Add(tbIdOwner);
@@ -379,7 +382,6 @@
             Controls.Add(tbMotivo);
             Controls.Add(tbSintomas);
             Controls.Add(label6);
-            Controls.Add(label5);
             Controls.Add(label4);
             Controls.Add(tbIdPet);
             Controls.Add(label3);
@@ -387,7 +389,6 @@
             Controls.Add(label1);
             Name = "FormEditQueryAndVaccine";
             Text = "FormEditQueryAndVaccine";
-            Load += FormEditQueryAndVaccine_Load;
             gpVaccine.ResumeLayout(false);
             gpVaccine.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvPets).EndInit();
@@ -418,7 +419,6 @@
         private TextBox tbMotivo;
         private TextBox tbSintomas;
         private Label label6;
-        private Label label5;
         private Label label4;
         private TextBox tbIdPet;
         private Label label3;
@@ -427,6 +427,8 @@
         private Button btnSearchPets;
         private DataGridView dgvPets;
         private TextBox tbIdOwner;
-        private DateTimePicker dateTimePicker1;
+        private TextBox tbDate;
+        private Label label5;
+        private TextBox textBox1;
     }
 }
