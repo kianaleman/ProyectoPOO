@@ -156,7 +156,6 @@
             Name = "FormInicioSesion";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Veterinaria El POO";
-            Load += FormInicioSesion_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
             ResumeLayout(false);

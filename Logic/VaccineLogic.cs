@@ -8,6 +8,7 @@ using System.Data.SQLite;
 
 namespace VeterinariaProyecto.Logic
 {
+    // Misma Logica que OwnerLogic
     public class VaccineLogic : DataAccess<Vaccine>
     {
         private static VaccineLogic? _instancia = null;

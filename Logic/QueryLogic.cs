@@ -9,6 +9,7 @@ using VeterinariaProyecto.Modelo;
 
 namespace VeterinariaProyecto.Logic
 {
+    // Misma Logica que OwnerLogic
     public class QueryLogic : DataAccess<Query>
     {
         private static QueryLogic? _instancia = null;
@@ -56,6 +57,8 @@ namespace VeterinariaProyecto.Logic
 
         public List<Query> ListarQueryConNombreMascota()
         {
+            // La consulta utiliza un INNER JOIN para unir las tablas PetQuery y Pet en base al campo idPet,
+            // y selecciona todas las columnas de PetQuery (Q.*) junto con el alias P.nombre como nombreMascota de la tabla Pet
             string query = @"
                 SELECT Q.*, P.nombre AS nombreMascota
                 FROM PetQuery Q

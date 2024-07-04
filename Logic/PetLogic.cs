@@ -9,6 +9,7 @@ using VeterinariaProyecto.Modelo;
 
 namespace VeterinariaProyecto.Logic
 {
+    /* Contiene la misma Logica que OwnerLogic */
     public class PetLogic : DataAccess<Pet>
     {
         private static PetLogic? _instancia = null;
@@ -204,7 +205,7 @@ namespace VeterinariaProyecto.Logic
                 Console.WriteLine($"Error al obtener la Mascota por ID: {ex.Message}");
             }
 
-            // Devuelve pet, que puede ser null si no se encontró ninguna mascota con el id especificado
+            // Devuelve pet, que puede ser null si no se encontro ninguna mascota con el id especificado
             return pet;
 
         }

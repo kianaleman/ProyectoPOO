@@ -140,8 +140,8 @@ namespace VeterinariaProyecto
 
         private void tbIdOwner_TextChanged(object sender, EventArgs e)
         {
-            //  El propósito de este patrón (detener y reiniciar el temporizador) es crear un retraso
-            //  controlado antes de ejecutar una acción (como buscar en la base de datos) después de que el usuario deje de escribir.
+            //  El proposito de este patron (detener y reiniciar el temporizador) es crear un retraso
+            //  controlado antes de ejecutar una accion (como buscar en la base de datos) despues de que el usuario deje de escribir
             if (shouldRestartTimer)
             {
                 searchTimer.Stop();

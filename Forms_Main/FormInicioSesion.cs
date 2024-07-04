@@ -1,10 +1,11 @@
+using VeterinariaProyecto.Logic;
+using VeterinariaProyecto.Modelo;
+using VeterinariaProyecto.VariablesGlobales;
+
 namespace VeterinariaProyecto
 {
     public partial class FormInicioSesion : Form
     {
-        public string user = "admon";
-        public string password = "1234";
-
         public FormInicioSesion()
         {
             InitializeComponent();
@@ -12,48 +13,35 @@ namespace VeterinariaProyecto
 
         private void btnIngreso_Click(object sender, EventArgs e)
         {
-            //el metodo .Trim() se utiliza para eliminar espacios atras y adelante de lo ingresado
-            //por el usuario
-            if (tbUser.Text != user || tbPassword.Text != password)
+            DatosLogin.ID = UsuarioLogic.Instancia.SearchUser(tbUser.Text);
+            if(DatosLogin.ID != -1)
             {
-                //evaluar en que se equivoco para luego mostrar el mensaje de error
-                if (tbUser.Text != user)
+                Usuario currentUser = UsuarioLogic.Instancia.ObtenerUserPorId(DatosLogin.ID);
+                if(currentUser != null) 
                 {
-                    //MessageBox.Show para mostrar el mensaje de error
-                    //tbUser.Clear() para limpiar la caja de texto
-                    //tbUser.Focus() para ubicar el cursor en la caja de texto
-                    //return para que no realice nada mas
-                    MessageBox.Show("Usuario Incorrecto");
-                    tbUser.Clear();
-                    tbUser.Focus();
-                    return;
+                    DatosLogin.user = currentUser.usuario;
+                    DatosLogin.password = currentUser.password;
                 }
 
-                if (tbPassword.Text != password)
+                if(tbPassword.Text != DatosLogin.password)
                 {
-                    //MessageBox.Show para mostrar el mensaje de error
-                    //tbPassword.Clear() para limpiar la caja de texto
-                    //tbPassword.Focus() para ubicar el cursor en la caja de texto
-                    //return para que no realice nada mas
                     MessageBox.Show("Contraseña Incorrecta");
                     tbPassword.Clear();
                     tbPassword.Focus();
                     return;
                 }
-
+                FormMain Form = new FormMain();
+                Form.ShowDialog();
+                tbPassword.Clear();
+                tbUser.Clear();
             }
             else
             {
+                MessageBox.Show("Usuario Incorrecto");
                 tbUser.Clear();
-                tbPassword.Clear();
-                FormMain Form = new FormMain();
-                Form.ShowDialog();
+                tbUser.Focus();
+                return;
             }
-
-        }
-
-        private void FormInicioSesion_Load(object sender, EventArgs e)
-        {
         }
 
         private void btnExit_Click(object sender, EventArgs e)

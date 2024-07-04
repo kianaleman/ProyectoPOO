@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using VeterinariaProyecto.Forms_Main;
 
 namespace VeterinariaProyecto
 {
@@ -55,7 +56,8 @@ namespace VeterinariaProyecto
 
         private void btnSettings_Click(object sender, EventArgs e)
         {
-
+            FormSettings OpenFormSettings = new FormSettings();
+            OpenFormSettings.ShowDialog();
         }
     }
 }
