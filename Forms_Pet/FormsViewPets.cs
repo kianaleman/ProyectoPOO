@@ -19,6 +19,37 @@ namespace VeterinariaProyecto
             InitializeComponent();
         }
 
+        public void mostrar_Owners()
+        {
+            dgvOwners.DataSource = null;
+            dgvOwners.DataSource = OwnerLogic.Instancia.ListarOwners();
+
+
+            dgvOwners.DefaultCellStyle.WrapMode = DataGridViewTriState.True; // Permite el ajuste de texto
+            dgvOwners.Columns.Clear();
+
+
+            var columns = new List<(string DataPropertyName, string HeaderText)>
+            {
+                ("Nombres", "Nombres"),
+                ("Apellidos", "Apellidos"),
+                ("Telefono", "Telefono"),
+                ("Direccion", "Direccion"),
+                ("Identificacion", "Identificacion")
+            };
+
+            // Añade las columnas utilizando un bucle
+            foreach (var (DataPropertyName, HeaderText) in columns)
+            {
+                var column = new DataGridViewTextBoxColumn
+                {
+                    DataPropertyName = DataPropertyName,
+                    HeaderText = HeaderText,
+                };
+
+                dgvOwners.Columns.Add(column);
+            }
+        }
         public void mostrar_Pets()
         {
             dgvPets.DataSource = null;
@@ -54,10 +85,10 @@ namespace VeterinariaProyecto
                 };
 
                 // Si es la columna de "Notas", habilita el ajuste de texto
-                if (DataPropertyName == "notas")
+                /*if (DataPropertyName == "notas")
                 {
                     column.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
-                }
+                }*/
 
                 dgvPets.Columns.Add(column);
             }
@@ -67,6 +98,7 @@ namespace VeterinariaProyecto
         private void FormsViewPets_Load(object sender, EventArgs e)
         {
             mostrar_Pets();
+            mostrar_Owners();
         }
 
         private void btnSearchOwner_Click(object sender, EventArgs e)
@@ -79,6 +111,7 @@ namespace VeterinariaProyecto
                     FormPetWanted OpenFormPetWanted = new FormPetWanted(respuesta);
                     OpenFormPetWanted.ShowDialog();
                     mostrar_Pets();
+                    mostrar_Owners();
                     tbIdentificacion.Clear();
                 }
                 else

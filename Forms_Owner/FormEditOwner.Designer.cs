@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            label5 = new Label();
             btnCancel = new Button();
             label7 = new Label();
             tbIdentificacion = new TextBox();
@@ -42,26 +41,22 @@
             label3 = new Label();
             label2 = new Label();
             label1 = new Label();
+            panel1 = new Panel();
+            label8 = new Label();
+            panel1.SuspendLayout();
             SuspendLayout();
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.BackColor = Color.OliveDrab;
-            label5.Font = new Font("Trebuchet MS", 18F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            label5.Location = new Point(26, 9);
-            label5.Name = "label5";
-            label5.Size = new Size(224, 38);
-            label5.TabIndex = 32;
-            label5.Text = "EDITAR DUEÑO";
             // 
             // btnCancel
             // 
-            btnCancel.Location = new Point(639, 169);
+            btnCancel.FlatAppearance.MouseOverBackColor = Color.FromArgb(255, 128, 128);
+            btnCancel.FlatStyle = FlatStyle.Flat;
+            btnCancel.Font = new Font("Trebuchet MS", 12F, FontStyle.Bold);
+            btnCancel.ForeColor = SystemColors.ButtonFace;
+            btnCancel.Location = new Point(608, 236);
             btnCancel.Margin = new Padding(4);
             btnCancel.Name = "btnCancel";
-            btnCancel.Size = new Size(183, 64);
-            btnCancel.TabIndex = 31;
+            btnCancel.Size = new Size(183, 43);
+            btnCancel.TabIndex = 6;
             btnCancel.Text = "Volver";
             btnCancel.UseVisualStyleBackColor = true;
             btnCancel.Click += btnCancel_Click_1;
@@ -69,21 +64,25 @@
             // label7
             // 
             label7.AutoSize = true;
-            label7.Font = new Font("Trebuchet MS", 12F, FontStyle.Bold);
-            label7.Location = new Point(26, 84);
+            label7.Font = new Font("Century Gothic", 10.2F, FontStyle.Bold);
+            label7.ForeColor = SystemColors.Control;
+            label7.Location = new Point(26, 74);
             label7.Margin = new Padding(4, 0, 4, 0);
             label7.Name = "label7";
-            label7.Size = new Size(148, 26);
+            label7.Size = new Size(126, 19);
             label7.TabIndex = 30;
             label7.Text = "Identificacion:";
             // 
             // tbIdentificacion
             // 
-            tbIdentificacion.Location = new Point(182, 84);
+            tbIdentificacion.BackColor = SystemColors.ButtonFace;
+            tbIdentificacion.BorderStyle = BorderStyle.FixedSingle;
+            tbIdentificacion.Font = new Font("Century Gothic", 12F);
+            tbIdentificacion.Location = new Point(182, 74);
             tbIdentificacion.Margin = new Padding(4);
             tbIdentificacion.Name = "tbIdentificacion";
-            tbIdentificacion.Size = new Size(318, 27);
-            tbIdentificacion.TabIndex = 29;
+            tbIdentificacion.Size = new Size(364, 32);
+            tbIdentificacion.TabIndex = 0;
             // 
             // label6
             // 
@@ -96,99 +95,137 @@
             // 
             // btnSave
             // 
-            btnSave.Location = new Point(639, 84);
+            btnSave.FlatAppearance.MouseOverBackColor = Color.FromArgb(128, 255, 128);
+            btnSave.FlatStyle = FlatStyle.Flat;
+            btnSave.Font = new Font("Trebuchet MS", 12F, FontStyle.Bold);
+            btnSave.ForeColor = SystemColors.ButtonFace;
+            btnSave.Location = new Point(608, 161);
             btnSave.Margin = new Padding(4);
             btnSave.Name = "btnSave";
-            btnSave.Size = new Size(183, 64);
-            btnSave.TabIndex = 27;
-            btnSave.Text = "GUARDAR CAMBIOS";
+            btnSave.Size = new Size(183, 43);
+            btnSave.TabIndex = 5;
+            btnSave.Text = "Guardar";
             btnSave.UseVisualStyleBackColor = true;
             btnSave.Click += btnSave_Click_1;
             // 
             // tbLastNames
             // 
-            tbLastNames.Location = new Point(136, 185);
+            tbLastNames.BackColor = SystemColors.ButtonFace;
+            tbLastNames.Font = new Font("Century Gothic", 12F);
+            tbLastNames.Location = new Point(182, 182);
             tbLastNames.Margin = new Padding(4);
             tbLastNames.Name = "tbLastNames";
-            tbLastNames.Size = new Size(364, 27);
-            tbLastNames.TabIndex = 26;
+            tbLastNames.Size = new Size(364, 32);
+            tbLastNames.TabIndex = 2;
             // 
             // tbNumber
             // 
-            tbNumber.Location = new Point(136, 233);
+            tbNumber.BackColor = SystemColors.ButtonFace;
+            tbNumber.Font = new Font("Century Gothic", 12F);
+            tbNumber.Location = new Point(182, 236);
             tbNumber.Margin = new Padding(4);
             tbNumber.Name = "tbNumber";
-            tbNumber.Size = new Size(364, 27);
-            tbNumber.TabIndex = 25;
+            tbNumber.Size = new Size(364, 32);
+            tbNumber.TabIndex = 3;
             // 
             // tbAddress
             // 
-            tbAddress.Location = new Point(151, 286);
+            tbAddress.BackColor = SystemColors.ButtonFace;
+            tbAddress.Font = new Font("Century Gothic", 12F);
+            tbAddress.Location = new Point(182, 295);
             tbAddress.Margin = new Padding(4);
             tbAddress.Multiline = true;
             tbAddress.Name = "tbAddress";
-            tbAddress.Size = new Size(349, 75);
-            tbAddress.TabIndex = 24;
+            tbAddress.Size = new Size(364, 75);
+            tbAddress.TabIndex = 4;
             // 
             // tbName
             // 
-            tbName.Location = new Point(136, 137);
+            tbName.BackColor = SystemColors.ButtonFace;
+            tbName.Font = new Font("Century Gothic", 12F);
+            tbName.Location = new Point(182, 127);
             tbName.Margin = new Padding(4);
             tbName.Name = "tbName";
-            tbName.Size = new Size(364, 27);
-            tbName.TabIndex = 23;
+            tbName.Size = new Size(364, 32);
+            tbName.TabIndex = 1;
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Font = new Font("Trebuchet MS", 12F, FontStyle.Bold);
-            label4.Location = new Point(26, 286);
+            label4.Font = new Font("Century Gothic", 10.2F, FontStyle.Bold);
+            label4.ForeColor = SystemColors.Control;
+            label4.Location = new Point(54, 295);
             label4.Margin = new Padding(4, 0, 4, 0);
             label4.Name = "label4";
-            label4.Size = new Size(108, 26);
+            label4.Size = new Size(93, 19);
             label4.TabIndex = 22;
             label4.Text = "Direccion:";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Font = new Font("Trebuchet MS", 12F, FontStyle.Bold);
-            label3.Location = new Point(26, 233);
+            label3.Font = new Font("Century Gothic", 10.2F, FontStyle.Bold);
+            label3.ForeColor = SystemColors.Control;
+            label3.Location = new Point(63, 236);
             label3.Margin = new Padding(4, 0, 4, 0);
             label3.Name = "label3";
-            label3.Size = new Size(100, 26);
+            label3.Size = new Size(84, 19);
             label3.TabIndex = 21;
             label3.Text = "Telefono:";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Font = new Font("Trebuchet MS", 12F, FontStyle.Bold);
-            label2.Location = new Point(26, 185);
+            label2.Font = new Font("Century Gothic", 10.2F, FontStyle.Bold);
+            label2.ForeColor = SystemColors.Control;
+            label2.Location = new Point(56, 182);
             label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
-            label2.Size = new Size(112, 26);
+            label2.Size = new Size(96, 19);
             label2.TabIndex = 20;
             label2.Text = "Apellidos: ";
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Trebuchet MS", 12F, FontStyle.Bold);
-            label1.Location = new Point(26, 137);
+            label1.Font = new Font("Century Gothic", 10.2F, FontStyle.Bold);
+            label1.ForeColor = SystemColors.Control;
+            label1.Location = new Point(63, 128);
             label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
-            label1.Size = new Size(102, 26);
+            label1.Size = new Size(89, 19);
             label1.TabIndex = 19;
             label1.Text = "Nombres:";
+            // 
+            // panel1
+            // 
+            panel1.BackColor = Color.FromArgb(0, 80, 200);
+            panel1.Controls.Add(label8);
+            panel1.Dock = DockStyle.Top;
+            panel1.Location = new Point(0, 0);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(829, 38);
+            panel1.TabIndex = 33;
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.BackColor = Color.FromArgb(0, 80, 200);
+            label8.Font = new Font("Century Gothic", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label8.ForeColor = SystemColors.Control;
+            label8.Location = new Point(3, 9);
+            label8.Name = "label8";
+            label8.Size = new Size(171, 27);
+            label8.TabIndex = 18;
+            label8.Text = "EDITAR DUEÑO";
             // 
             // FormEditOwner
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(128, 255, 128);
-            ClientSize = new Size(892, 383);
-            Controls.Add(label5);
+            BackColor = Color.FromArgb(39, 57, 90);
+            ClientSize = new Size(829, 383);
+            Controls.Add(panel1);
             Controls.Add(btnCancel);
             Controls.Add(label7);
             Controls.Add(tbIdentificacion);
@@ -207,13 +244,13 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "FormEditOwner";
             Load += FormEditOwner_Load_1;
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-
-        public Label label5;
         public Button btnCancel;
         private Label label7;
         public TextBox tbIdentificacion;
@@ -227,5 +264,7 @@
         private Label label3;
         private Label label2;
         private Label label1;
+        private Panel panel1;
+        public Label label8;
     }
 }

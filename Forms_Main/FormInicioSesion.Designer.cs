@@ -30,94 +30,59 @@
         {
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormInicioSesion));
-            label1 = new Label();
-            pictureBox1 = new PictureBox();
-            label2 = new Label();
             tbPassword = new TextBox();
-            label3 = new Label();
-            label4 = new Label();
             tbUser = new TextBox();
             btnIngreso = new Button();
             errorProvider1 = new ErrorProvider(components);
             btnExit = new Button();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            pictureBox1 = new PictureBox();
+            panel1 = new Panel();
+            label1 = new Label();
             ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            panel1.SuspendLayout();
             SuspendLayout();
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 18F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            label1.Location = new Point(66, 9);
-            label1.Name = "label1";
-            label1.Size = new Size(286, 41);
-            label1.TabIndex = 0;
-            label1.Text = "Veterinaria El POO";
-            // 
-            // pictureBox1
-            // 
-            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(-8, -1);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(80, 62);
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox1.TabIndex = 1;
-            pictureBox1.TabStop = false;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI Emoji", 7.8F, FontStyle.Italic, GraphicsUnit.Point, 0);
-            label2.Location = new Point(78, 68);
-            label2.Name = "label2";
-            label2.Size = new Size(405, 68);
-            label2.TabIndex = 2;
-            label2.Text = "Bienvenido al Sistema de Datos de Mascotas de la Veterinaria POO!\r\n\r\nEs un gusto atenderle!\r\n\r\n";
             // 
             // tbPassword
             // 
-            tbPassword.Location = new Point(57, 237);
+            tbPassword.BackColor = Color.FromArgb(39, 57, 80);
+            tbPassword.BorderStyle = BorderStyle.None;
+            tbPassword.Font = new Font("Century Gothic", 12F);
+            tbPassword.ForeColor = Color.Silver;
+            tbPassword.Location = new Point(333, 165);
             tbPassword.Name = "tbPassword";
-            tbPassword.Size = new Size(279, 27);
-            tbPassword.TabIndex = 3;
+            tbPassword.PlaceholderText = "Contraseña";
+            tbPassword.Size = new Size(369, 25);
+            tbPassword.TabIndex = 2;
             tbPassword.UseSystemPasswordChar = true;
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            label3.Location = new Point(57, 152);
-            label3.Name = "label3";
-            label3.Size = new Size(125, 20);
-            label3.TabIndex = 4;
-            label3.Text = "Ingrese Usuario:";
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            label4.Location = new Point(57, 214);
-            label4.Name = "label4";
-            label4.Size = new Size(151, 20);
-            label4.TabIndex = 5;
-            label4.Text = "Ingrese Contraseña:";
             // 
             // tbUser
             // 
-            tbUser.Location = new Point(57, 175);
+            tbUser.BackColor = Color.FromArgb(39, 57, 80);
+            tbUser.BorderStyle = BorderStyle.None;
+            tbUser.Font = new Font("Century Gothic", 12F);
+            tbUser.ForeColor = Color.Silver;
+            tbUser.Location = new Point(333, 96);
             tbUser.Name = "tbUser";
-            tbUser.Size = new Size(279, 27);
-            tbUser.TabIndex = 6;
+            tbUser.PlaceholderText = "Usuario";
+            tbUser.Size = new Size(369, 25);
+            tbUser.TabIndex = 1;
             // 
             // btnIngreso
             // 
-            btnIngreso.Font = new Font("Arial", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            btnIngreso.Location = new Point(139, 292);
+            btnIngreso.BackColor = Color.FromArgb(33, 53, 73);
+            btnIngreso.FlatAppearance.BorderColor = Color.FromArgb(85, 159, 127);
+            btnIngreso.FlatAppearance.MouseDownBackColor = Color.FromArgb(20, 20, 20);
+            btnIngreso.FlatAppearance.MouseOverBackColor = Color.FromArgb(70, 118, 126);
+            btnIngreso.FlatStyle = FlatStyle.Flat;
+            btnIngreso.Font = new Font("Century Gothic", 12F);
+            btnIngreso.ForeColor = Color.LightGray;
+            btnIngreso.Location = new Point(316, 224);
             btnIngreso.Name = "btnIngreso";
-            btnIngreso.Size = new Size(94, 29);
-            btnIngreso.TabIndex = 7;
+            btnIngreso.Size = new Size(408, 40);
+            btnIngreso.TabIndex = 3;
             btnIngreso.Text = "Ingresar";
-            btnIngreso.UseVisualStyleBackColor = true;
+            btnIngreso.UseVisualStyleBackColor = false;
             btnIngreso.Click += btnIngreso_Click;
             // 
             // errorProvider1
@@ -126,53 +91,86 @@
             // 
             // btnExit
             // 
-            btnExit.Font = new Font("Arial", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            btnExit.Location = new Point(694, 409);
+            btnExit.BackColor = Color.FromArgb(33, 53, 73);
+            btnExit.FlatAppearance.BorderColor = Color.Red;
+            btnExit.FlatAppearance.MouseDownBackColor = Color.FromArgb(20, 20, 20);
+            btnExit.FlatAppearance.MouseOverBackColor = Color.FromArgb(70, 118, 126);
+            btnExit.FlatStyle = FlatStyle.Flat;
+            btnExit.Font = new Font("Century Gothic", 12F);
+            btnExit.ForeColor = Color.LightGray;
+            btnExit.Location = new Point(674, 289);
             btnExit.Name = "btnExit";
             btnExit.Size = new Size(94, 29);
-            btnExit.TabIndex = 8;
+            btnExit.TabIndex = 4;
             btnExit.Text = "Salir";
-            btnExit.UseVisualStyleBackColor = true;
+            btnExit.UseVisualStyleBackColor = false;
             btnExit.Click += btnExit_Click;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Location = new Point(12, 54);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(218, 227);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 1;
+            pictureBox1.TabStop = false;
+            // 
+            // panel1
+            // 
+            panel1.BackColor = Color.FromArgb(0, 100, 182);
+            panel1.Controls.Add(pictureBox1);
+            panel1.Dock = DockStyle.Left;
+            panel1.Location = new Point(0, 0);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(250, 330);
+            panel1.TabIndex = 9;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Century Gothic", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.ForeColor = SystemColors.ButtonFace;
+            label1.Location = new Point(409, 9);
+            label1.Name = "label1";
+            label1.Size = new Size(188, 34);
+            label1.TabIndex = 10;
+            label1.Text = "VETERINARIA";
             // 
             // FormInicioSesion
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(128, 255, 128);
-            ClientSize = new Size(800, 450);
+            BackColor = Color.FromArgb(39, 57, 90);
+            ClientSize = new Size(780, 330);
+            Controls.Add(label1);
+            Controls.Add(panel1);
             Controls.Add(btnExit);
             Controls.Add(btnIngreso);
             Controls.Add(tbUser);
-            Controls.Add(label4);
-            Controls.Add(label3);
             Controls.Add(tbPassword);
-            Controls.Add(label2);
-            Controls.Add(pictureBox1);
-            Controls.Add(label1);
             FormBorderStyle = FormBorderStyle.None;
             Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
             Name = "FormInicioSesion";
+            Opacity = 0.9D;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Veterinaria El POO";
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            panel1.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-
-        private Label label1;
-        private PictureBox pictureBox1;
-        private Label label2;
         private TextBox tbPassword;
-        private Label label3;
-        private Label label4;
         private TextBox tbUser;
         private Button btnIngreso;
         private ErrorProvider errorProvider1;
         private Button btnExit;
+        private Panel panel1;
+        private PictureBox pictureBox1;
+        private Label label1;
     }
 }

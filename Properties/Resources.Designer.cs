@@ -81,6 +81,56 @@ namespace VeterinariaProyecto.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ic_ajustecito {
+            get {
+                object obj = ResourceManager.GetObject("ic_ajustecito", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ic_librito {
+            get {
+                object obj = ResourceManager.GetObject("ic_librito", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ic_lupita {
+            get {
+                object obj = ResourceManager.GetObject("ic_lupita", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ic_mascotas {
+            get {
+                object obj = ResourceManager.GetObject("ic_mascotas", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ic_plusesito {
+            get {
+                object obj = ResourceManager.GetObject("ic_plusesito", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
         internal static byte[] panda_img {
@@ -96,6 +146,16 @@ namespace VeterinariaProyecto.Properties {
         internal static System.Drawing.Bitmap panda_png {
             get {
                 object obj = ResourceManager.GetObject("panda_png", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Registro {
+            get {
+                object obj = ResourceManager.GetObject("Registro", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

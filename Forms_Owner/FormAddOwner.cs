@@ -206,18 +206,28 @@ namespace VeterinariaProyecto
                 int respuesta = OwnerLogic.Instancia.SearchOwner(tbIdentificacion.Text);
 
                 // Evaluar la respuesta y configurar el ErrorProvider
-                if (respuesta != -1)
+                if (tbIdentificacion.Text.Length == 16)
                 {
-                    errorProvider.SetError(tbIdentificacion, "El dueño con la identeificación proporcionada ya existe.");
-                    errorProvider.Icon = SystemIcons.Error; // Icono de error por defecto
-                    ControlUtils.HabilitarDeshabilitarControles(this, false, tbIdentificacion,btnCancel);
+                    if (respuesta != -1)
+                    {
+                        errorProvider.SetError(tbIdentificacion, "El dueño con la identificación proporcionada ya existe.");
+                        errorProvider.Icon = SystemIcons.Error; // Icono de error por defecto
+                        ControlUtils.HabilitarDeshabilitarControles(this, false, tbIdentificacion, btnCancel);
+                    }
+                    else
+                    {
+                        errorProvider.SetError(tbIdentificacion, "");
+                        errorProvider.Icon = Properties.Resources.checkIcon;
+                        ControlUtils.HabilitarDeshabilitarControles(this, true);
+                    }
                 }
                 else
                 {
-                    errorProvider.SetError(tbIdentificacion, "El dueño con la identificación proporcionada no existe.");
-                    errorProvider.Icon = Properties.Resources.checkIcon;
-                    ControlUtils.HabilitarDeshabilitarControles(this, true);
+                    errorProvider.SetError(tbIdentificacion, "Ingrese una Identificacion Valida");
+                    errorProvider.Icon = SystemIcons.Error; // Icono de error por defecto
+                    ControlUtils.HabilitarDeshabilitarControles(this, false, tbIdentificacion, btnCancel);
                 }
+                
             }
             else
             {

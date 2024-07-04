@@ -45,10 +45,14 @@
             // 
             // btnExit
             // 
-            btnExit.Location = new Point(985, 418);
+            btnExit.FlatAppearance.MouseOverBackColor = Color.FromArgb(255, 128, 128);
+            btnExit.FlatStyle = FlatStyle.Flat;
+            btnExit.Font = new Font("Trebuchet MS", 12F, FontStyle.Bold);
+            btnExit.ForeColor = SystemColors.ButtonFace;
+            btnExit.Location = new Point(1023, 471);
             btnExit.Name = "btnExit";
-            btnExit.Size = new Size(118, 96);
-            btnExit.TabIndex = 0;
+            btnExit.Size = new Size(116, 43);
+            btnExit.TabIndex = 5;
             btnExit.Text = "Volver";
             btnExit.UseVisualStyleBackColor = true;
             btnExit.Click += btnExit_Click;
@@ -56,10 +60,11 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Trebuchet MS", 18F, FontStyle.Bold | FontStyle.Italic);
+            label1.Font = new Font("Century Gothic", 16.2F, FontStyle.Bold);
+            label1.ForeColor = SystemColors.Control;
             label1.Location = new Point(12, 9);
             label1.Name = "label1";
-            label1.Size = new Size(338, 38);
+            label1.Size = new Size(346, 34);
             label1.TabIndex = 1;
             label1.Text = "CONSULTAS Y VACUNAS";
             // 
@@ -71,6 +76,7 @@
             dgvQuery.AllowUserToResizeRows = false;
             dgvQuery.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvQuery.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            dgvQuery.BackgroundColor = Color.FromArgb(39, 57, 90);
             dgvQuery.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvQuery.Location = new Point(18, 147);
             dgvQuery.Name = "dgvQuery";
@@ -88,6 +94,7 @@
             dgvVaccine.AllowUserToResizeRows = false;
             dgvVaccine.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvVaccine.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            dgvVaccine.BackgroundColor = Color.FromArgb(39, 57, 90);
             dgvVaccine.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvVaccine.Location = new Point(730, 147);
             dgvVaccine.Name = "dgvVaccine";
@@ -103,7 +110,7 @@
             tbIdOwner.Name = "tbIdOwner";
             tbIdOwner.PlaceholderText = "Ingresar ID Dueño";
             tbIdOwner.Size = new Size(153, 27);
-            tbIdOwner.TabIndex = 6;
+            tbIdOwner.TabIndex = 0;
             tbIdOwner.TextChanged += tbIdOwner_TextChanged;
             // 
             // cmbPets
@@ -114,7 +121,7 @@
             cmbPets.Location = new Point(189, 79);
             cmbPets.Name = "cmbPets";
             cmbPets.Size = new Size(151, 28);
-            cmbPets.TabIndex = 7;
+            cmbPets.TabIndex = 2;
             // 
             // errorProvider1
             // 
@@ -122,20 +129,26 @@
             // 
             // btnSearchQuery
             // 
+            btnSearchQuery.FlatStyle = FlatStyle.Flat;
+            btnSearchQuery.Font = new Font("Trebuchet MS", 12F, FontStyle.Bold);
+            btnSearchQuery.ForeColor = SystemColors.ButtonFace;
             btnSearchQuery.Location = new Point(361, 76);
             btnSearchQuery.Name = "btnSearchQuery";
-            btnSearchQuery.Size = new Size(127, 31);
-            btnSearchQuery.TabIndex = 8;
+            btnSearchQuery.Size = new Size(154, 43);
+            btnSearchQuery.TabIndex = 3;
             btnSearchQuery.Text = "Buscar Datos";
             btnSearchQuery.UseVisualStyleBackColor = true;
             btnSearchQuery.Click += btnSearchQuery_Click;
             // 
             // btnVerTodo
             // 
-            btnVerTodo.Location = new Point(494, 76);
+            btnVerTodo.FlatStyle = FlatStyle.Flat;
+            btnVerTodo.Font = new Font("Trebuchet MS", 12F, FontStyle.Bold);
+            btnVerTodo.ForeColor = SystemColors.ButtonFace;
+            btnVerTodo.Location = new Point(523, 76);
             btnVerTodo.Name = "btnVerTodo";
-            btnVerTodo.Size = new Size(127, 31);
-            btnVerTodo.TabIndex = 9;
+            btnVerTodo.Size = new Size(104, 43);
+            btnVerTodo.TabIndex = 4;
             btnVerTodo.Text = "Ver Todo";
             btnVerTodo.UseVisualStyleBackColor = true;
             btnVerTodo.Click += btnVerTodo_Click;
@@ -144,7 +157,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(128, 255, 128);
+            BackColor = Color.FromArgb(39, 57, 90);
             ClientSize = new Size(1151, 556);
             Controls.Add(btnVerTodo);
             Controls.Add(btnSearchQuery);

@@ -37,8 +37,11 @@
             btnSearchOwner = new Button();
             linkLabel1 = new LinkLabel();
             btnCancel = new Button();
+            dgvOwners = new DataGridView();
+            label3 = new Label();
             ((System.ComponentModel.ISupportInitialize)dgvPets).BeginInit();
             ((System.ComponentModel.ISupportInitialize)ownerLogicBindingSource).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvOwners).BeginInit();
             SuspendLayout();
             // 
             // dgvPets
@@ -49,16 +52,16 @@
             dgvPets.AllowUserToResizeRows = false;
             dgvPets.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvPets.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
-            dgvPets.BackgroundColor = Color.FromArgb(128, 255, 128);
+            dgvPets.BackgroundColor = Color.FromArgb(39, 57, 90);
             dgvPets.BorderStyle = BorderStyle.None;
             dgvPets.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvPets.GridColor = SystemColors.InactiveCaptionText;
-            dgvPets.Location = new Point(12, 189);
+            dgvPets.Location = new Point(12, 171);
             dgvPets.Name = "dgvPets";
             dgvPets.ReadOnly = true;
             dgvPets.RowHeadersVisible = false;
             dgvPets.RowHeadersWidth = 51;
-            dgvPets.Size = new Size(1232, 483);
+            dgvPets.Size = new Size(1232, 198);
             dgvPets.TabIndex = 0;
             // 
             // ownerLogicBindingSource
@@ -68,10 +71,11 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            label1.Font = new Font("Century Gothic", 16.2F, FontStyle.Bold);
+            label1.ForeColor = SystemColors.Control;
             label1.Location = new Point(491, 9);
             label1.Name = "label1";
-            label1.Size = new Size(311, 38);
+            label1.Size = new Size(313, 34);
             label1.TabIndex = 1;
             label1.Text = "DATOS DE MASCOTAS";
             // 
@@ -79,6 +83,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            label2.ForeColor = SystemColors.Control;
             label2.Location = new Point(12, 79);
             label2.Name = "label2";
             label2.Size = new Size(156, 28);
@@ -95,11 +100,14 @@
             // 
             // btnSearchOwner
             // 
-            btnSearchOwner.Image = Properties.Resources.panda_png;
-            btnSearchOwner.Location = new Point(491, 79);
+            btnSearchOwner.FlatStyle = FlatStyle.Flat;
+            btnSearchOwner.Font = new Font("Trebuchet MS", 12F, FontStyle.Bold);
+            btnSearchOwner.ForeColor = SystemColors.ButtonFace;
+            btnSearchOwner.Location = new Point(472, 76);
             btnSearchOwner.Name = "btnSearchOwner";
-            btnSearchOwner.Size = new Size(28, 29);
+            btnSearchOwner.Size = new Size(88, 43);
             btnSearchOwner.TabIndex = 29;
+            btnSearchOwner.Text = "Buscar";
             btnSearchOwner.UseVisualStyleBackColor = true;
             btnSearchOwner.Click += btnSearchOwner_Click;
             // 
@@ -113,22 +121,58 @@
             // 
             // btnCancel
             // 
+            btnCancel.FlatAppearance.MouseOverBackColor = Color.FromArgb(255, 128, 128);
+            btnCancel.FlatStyle = FlatStyle.Flat;
             btnCancel.Font = new Font("Trebuchet MS", 12F, FontStyle.Bold);
-            btnCancel.Location = new Point(1061, 105);
+            btnCancel.ForeColor = SystemColors.ButtonFace;
+            btnCancel.Location = new Point(1113, 83);
             btnCancel.Margin = new Padding(4);
             btnCancel.Name = "btnCancel";
-            btnCancel.Size = new Size(183, 64);
+            btnCancel.Size = new Size(118, 43);
             btnCancel.TabIndex = 32;
             btnCancel.Text = "Volver";
             btnCancel.UseVisualStyleBackColor = true;
             btnCancel.Click += btnCancel_Click;
             // 
+            // dgvOwners
+            // 
+            dgvOwners.AllowUserToAddRows = false;
+            dgvOwners.AllowUserToDeleteRows = false;
+            dgvOwners.AllowUserToResizeColumns = false;
+            dgvOwners.AllowUserToResizeRows = false;
+            dgvOwners.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvOwners.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            dgvOwners.BackgroundColor = Color.FromArgb(39, 57, 90);
+            dgvOwners.BorderStyle = BorderStyle.None;
+            dgvOwners.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvOwners.GridColor = SystemColors.InactiveCaptionText;
+            dgvOwners.Location = new Point(12, 474);
+            dgvOwners.Name = "dgvOwners";
+            dgvOwners.ReadOnly = true;
+            dgvOwners.RowHeadersVisible = false;
+            dgvOwners.RowHeadersWidth = 51;
+            dgvOwners.Size = new Size(1232, 198);
+            dgvOwners.TabIndex = 33;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Century Gothic", 16.2F, FontStyle.Bold);
+            label3.ForeColor = SystemColors.Control;
+            label3.Location = new Point(516, 418);
+            label3.Name = "label3";
+            label3.Size = new Size(271, 34);
+            label3.TabIndex = 34;
+            label3.Text = "DATOS DE DUEÑOS";
+            // 
             // FormsViewPets
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(128, 255, 128);
+            BackColor = Color.FromArgb(39, 57, 90);
             ClientSize = new Size(1256, 684);
+            Controls.Add(label3);
+            Controls.Add(dgvOwners);
             Controls.Add(btnCancel);
             Controls.Add(linkLabel1);
             Controls.Add(btnSearchOwner);
@@ -143,6 +187,7 @@
             Load += FormsViewPets_Load;
             ((System.ComponentModel.ISupportInitialize)dgvPets).EndInit();
             ((System.ComponentModel.ISupportInitialize)ownerLogicBindingSource).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvOwners).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -157,5 +202,7 @@
         private Button btnSearchOwner;
         private LinkLabel linkLabel1;
         private Button btnCancel;
+        private DataGridView dgvOwners;
+        private Label label3;
     }
 }

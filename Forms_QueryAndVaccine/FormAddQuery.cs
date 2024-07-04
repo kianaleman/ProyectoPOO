@@ -151,7 +151,7 @@ namespace VeterinariaProyecto
             {
                 // Se obtiene el valor seleccionado
                 object cellValue = dgvPets.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
-                
+
                 // Se valida que no sea nulo y que sea entero, en el caso que sea entero se asigna el valor a una TextBox
                 if (cellValue != null && int.TryParse(cellValue.ToString(), out int intValue))
                 {
@@ -305,6 +305,11 @@ namespace VeterinariaProyecto
         private void rBtnNo_CheckedChanged(object sender, EventArgs e)
         {
             tbTypeVaccine.Enabled = false;
+        }
+
+        private void tbMotivo_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

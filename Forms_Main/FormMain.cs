@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using VeterinariaProyecto.Forms_Main;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace VeterinariaProyecto
 {
@@ -58,6 +59,15 @@ namespace VeterinariaProyecto
         {
             FormSettings OpenFormSettings = new FormSettings();
             OpenFormSettings.ShowDialog();
+        }
+
+        private void FormMain_Load(object sender, EventArgs e)
+        {
+            // Obtener la fecha y hora actual
+            DateTime now = DateTime.Now;
+
+            // Mostrar la fecha y hora en la TextBox
+            tbTime.Text = now.ToString("dd-MM-yyyy");
         }
     }
 }

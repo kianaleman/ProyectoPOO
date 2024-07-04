@@ -36,10 +36,14 @@
             // 
             // btnSalir
             // 
-            btnSalir.Location = new Point(70, 291);
+            btnSalir.FlatAppearance.MouseDownBackColor = Color.FromArgb(255, 128, 128);
+            btnSalir.FlatStyle = FlatStyle.Flat;
+            btnSalir.Font = new Font("Trebuchet MS", 12F, FontStyle.Bold);
+            btnSalir.ForeColor = SystemColors.ButtonFace;
+            btnSalir.Location = new Point(12, 293);
             btnSalir.Name = "btnSalir";
-            btnSalir.Size = new Size(103, 58);
-            btnSalir.TabIndex = 0;
+            btnSalir.Size = new Size(226, 43);
+            btnSalir.TabIndex = 3;
             btnSalir.Text = "Volver";
             btnSalir.UseVisualStyleBackColor = true;
             btnSalir.Click += btnSalir_Click;
@@ -47,29 +51,38 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Trebuchet MS", 18F, FontStyle.Bold | FontStyle.Italic);
+            label1.Font = new Font("Century Gothic", 16.2F, FontStyle.Bold);
+            label1.ForeColor = SystemColors.Control;
             label1.Location = new Point(61, 22);
             label1.Name = "label1";
-            label1.Size = new Size(139, 38);
+            label1.Size = new Size(124, 34);
             label1.TabIndex = 1;
             label1.Text = "AJUSTES";
             // 
             // btnChangeUser
             // 
-            btnChangeUser.Location = new Point(70, 129);
+            btnChangeUser.FlatAppearance.MouseDownBackColor = Color.FromArgb(255, 128, 128);
+            btnChangeUser.FlatStyle = FlatStyle.Flat;
+            btnChangeUser.Font = new Font("Trebuchet MS", 12F, FontStyle.Bold);
+            btnChangeUser.ForeColor = SystemColors.ButtonFace;
+            btnChangeUser.Location = new Point(12, 131);
             btnChangeUser.Name = "btnChangeUser";
-            btnChangeUser.Size = new Size(103, 54);
-            btnChangeUser.TabIndex = 2;
+            btnChangeUser.Size = new Size(226, 43);
+            btnChangeUser.TabIndex = 1;
             btnChangeUser.Text = "Cambiar Usuario";
             btnChangeUser.UseVisualStyleBackColor = true;
             btnChangeUser.Click += btnChangeUser_Click;
             // 
             // btnChangePassword
             // 
-            btnChangePassword.Location = new Point(70, 214);
+            btnChangePassword.FlatAppearance.MouseDownBackColor = Color.FromArgb(255, 128, 128);
+            btnChangePassword.FlatStyle = FlatStyle.Flat;
+            btnChangePassword.Font = new Font("Trebuchet MS", 12F, FontStyle.Bold);
+            btnChangePassword.ForeColor = SystemColors.ButtonFace;
+            btnChangePassword.Location = new Point(12, 216);
             btnChangePassword.Name = "btnChangePassword";
-            btnChangePassword.Size = new Size(103, 51);
-            btnChangePassword.TabIndex = 3;
+            btnChangePassword.Size = new Size(226, 43);
+            btnChangePassword.TabIndex = 2;
             btnChangePassword.Text = "Cambiar Contraseña";
             btnChangePassword.UseVisualStyleBackColor = true;
             btnChangePassword.Click += btnChangePassword_Click;
@@ -78,8 +91,8 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(128, 255, 128);
-            ClientSize = new Size(269, 450);
+            BackColor = Color.FromArgb(39, 57, 90);
+            ClientSize = new Size(250, 450);
             Controls.Add(btnChangePassword);
             Controls.Add(btnChangeUser);
             Controls.Add(label1);
